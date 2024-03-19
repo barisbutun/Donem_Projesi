@@ -1,0 +1,6 @@
+@Donem_Projesi_HostAddress = http://localhost:5051
+
+GET {{Donem_Projesi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
