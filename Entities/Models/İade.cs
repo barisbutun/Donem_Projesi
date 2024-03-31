@@ -1,7 +1,9 @@
 ﻿namespace Donem_Projesi.Model
 {
-    public class İade:Musteri
+    public class İade
     {
+        int a;
+
        public Urunler urun_iade {  get; set; } 
       public   Siparis Siparis_iade { get; set; }  
 
@@ -14,7 +16,7 @@
 
         public int iade_id { get; set; }    
 
-        public İade(int iade_id) : base()
+        public İade(int iade_id) 
         {
             this.iade_id = iade_id;
            

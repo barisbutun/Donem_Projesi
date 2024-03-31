@@ -2,7 +2,7 @@
 {
     public class Musteri
     {
-        public Guid Id { get; set; }    
+        public int Id { get; set; }    
         public string Ad {  get; set; } 
         public string Soyad { get; set; }
         public  int Phone {  get; set; }
