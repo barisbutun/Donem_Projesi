@@ -1,22 +1,115 @@
-body {
-  margin: 0;
-}
-
-
-
-.body {
+.kayit-modal {
   width: 100vw;
   height: 100vh;
-  background-image: url('../public/Resimler/logo1.png');
+  background-image: url("./logolar/loginlogo.png");
   background-position: center;
   background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative; 
-}
+  }
+  
+  
+  
+  .containerKayit {
+    width: 60%; 
+    height: 60%; 
+    border: 3px solid black;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(3px);
+  }
+  
+  
+  
+  .baslık{
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: white;
+  }
+  
+  
+  
+  .isim, .email, .sifre, .telefon {
+    margin-bottom: 10px;
+  }
+  
+  
+  
+  .isim label, .email label, .sifre label, .telefon label {
+  font-size: 20px;
+  font-weight: 400;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 10px; 
+  color:white
 
-.container {
+  }
+  
+ 
+  
+  .isim input, .email input, .sifre input, .telefon input {
+    margin-bottom: 25px;
+    width: 100%;
+    color:rgb(162, 153, 181);
+    font-weight:bold;
+  
+  }
+  .hata-mesajı {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  
+  
+  .buttonKayit {
+    padding: 10px 20px;
+    background-color: gray;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+.buttonGiris{
+  padding: 10px 20px;
+  background-color:gray;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+  
+  .buttonKayit:hover {
+    background-color:#333;
+  }
+  .buttonGiris:hover {
+    background-color:#333;
+  }
+ 
+  a:hover {
+    color: white;
+    text-decoration: underline;
+  }
+  
+body {
+  margin: 0;
+}
+.container{
   width: 50%; 
   height: 50%; 
   border: 3px solid black;
@@ -25,30 +118,33 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(5px);
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  backdrop-filter: blur(3px);
+}
+.login {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("./logolar/loginlogo.png");
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; 
+  backdrop-filter: blur(5px);
 }
 
-.baslık {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.user,
+.username,
 .password {
   margin-bottom: 15px;
   width: 100%;
 }
 
-label {
-  font-weight: bold;
-}
-
-input {
+.username input,
+.password input {
   width: calc(100% - 20px);
   padding: 10px;
   border: 1px solid white;
@@ -57,99 +153,198 @@ input {
   margin-bottom: 10px;
 }
 
-button {
-  padding: 10px 20px;
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header-logo {
+  position: absolute;
+  top: -290px;
+  left: -490px;
+  transform:scale(0.15);
+}
+.App-header {
+  top:0;
+  left:0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgb(7, 7, 87);
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
+}
+.headerButtons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  z-index: 1; /* Set a high z-index to place it above header content */
+}
+.menu-toggle {
+  display: inline-block;
+  margin-left: 0; /* Remove default margin */
+  padding: 10px 15px;
+  border: none; /* Remove border */
+  background-color: transparent; /* Make it transparent */
+  color: #fff; /* Set white color for lines */
+  font-size: 20px; /* Adjust font size as needed */
+  cursor: pointer;
+}
+.headerGiris{
+  display: inline-block;
+  padding: 10px 15px;
   background-color:blue;
   color: #fff;
   border:none;
   border-radius: 10px;
   cursor: pointer;
-  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
   margin-bottom: 10px;
- 
-}
+  cursor:pointer;
 
-button:hover {
+}
+.headerKayıtOl{
+  display: inline-block;
+  padding: 10px 15px;
   background-color:blue;
-}
-
-a {
-  margin-bottom: 10px;
-  color: blue;
-  text-decoration: none;
-  margin-right: 5px;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-.kayıt{
-  width: 100vw;
-  height: 100vh;
-  background-image: url("../public/Resimler/logo2.png");
-  background-position: center;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  mix-blend-mode: darken;
-}
-
-.containerKayit{
-  width: 60%; 
-  height: 60%; 
-  border: 3px solid rgb(128, 128, 128);
-  border-radius: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(5px);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.isim,.sifre,.telefon,.email{
-  margin-bottom: 15px;
-  width: 100%;
-  color:rgb(162, 153, 181);
-  font-weight: bold;
-}
-.baslıkKayit{
-  color:black;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.buttonKayit{
-  padding: 10px 20px;
-  background-color:black;
-  color:white;
+  color: #fff;
   border:none;
   border-radius: 10px;
   cursor: pointer;
-  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor:pointer;
+}
+.App-header::before {
+  content: ''; /* Empty content for pseudo-element */
+  position: absolute; /* Position the pseudo-element absolutely */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10%; /* Cover the entire header area */
+  background-color: inherit; /* Inherit header background color */
+  z-index: -1; /* Place it behind the header content */
+}
+
+.header-nav {
+  display: none;  /* Initially hidden */
+}
+
+.header-nav.show {
+  display: flex;  /* Show menu on toggle */
+}
+
+.categories {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+.App-header h1 {
+  margin-left: 20px;
+}
+
+.App-main {
+  flex: 1;
+  padding: 20px;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-image: url('./logolar/fiat.png');
+  background-size: cover;
+  background-position: center;
+  padding: 200px;
+  margin:-20px;
+  margin-top: 50px;
+}
+
+.hero-text {
+  text-align: left;
+  display: flex;
+  flex-direction: column; /* Arrange items vertically */
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.hero-text h2 {
+  font-size: 50px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column; 
+  align-items: flex-start;
+}
+
+.hero-text p {
+  margin: 0; 
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Ürün kartları */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
   margin-bottom: 10px;
 }
 
-.buttonKayit:hover {
-  background-color:black;
+.product-card h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
 }
 
-.Filtrele{
-  width: 100vw;
-  height: 100vh;
-  background-position: center;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  background-image: url('../public/Resimler/Filtrele.png');
-  mix-blend-mode: darken;
+.product-card p {
+  font-size: 14px;
+  margin-bottom: 15px;
 }
+
+/* Kategoriler */
+.category-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-list li {
+  margin-bottom: 10px;
+}
+
+.category-list a {
+  text-decoration: none;
+  color: #333;
+}
+  
