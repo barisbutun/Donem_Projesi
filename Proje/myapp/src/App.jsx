@@ -1,16 +1,18 @@
-import React from "react";
-import Giris from "./pages/Giris";
-// import Kayit from "./pages/Kayit";
-// import Filtrele from "./pages/Filtrele";
-
+import React, { useState } from 'react';
+import Login from './pages/Login';
+import Kayit from './pages/Kayit';
+import Anasayfa from './pages/Anasayfa';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <Giris/>
-    
-    // <Filtrele/>
-    
-
+    <Router>
+      <Routes>
+        <Route path='/' element={<Anasayfa />} />
+        <Route path='/Kayit' element={<Kayit/>} />
+        <Route path='/Login' element={<Login />} />
+      </Routes>
+    </Router>
   );
 }
 
