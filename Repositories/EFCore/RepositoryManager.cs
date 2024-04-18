@@ -1,4 +1,4 @@
-﻿using Donem_Projesi.Model;
+﻿using Entities.Model;
 using Repositories.Concrats;
 using System;
 using System.Collections.Generic;
@@ -11,32 +11,40 @@ namespace Repositories.EFCore
     public class RepositoryManager : IRepositoryManager
     {
         private readonly RepositoryContext _context;
-        private readonly Lazy<ITradeRepository> _iadeRepository;
-        private readonly Lazy<ITradeRepository> _urunlerRepository;
-        private readonly Lazy<ITradeRepository> _siparisRepository;
-        private readonly Lazy<ITradeRepository> _sepetRepository;
-        private readonly Lazy<ITradeRepository> _musteriRepository;
+        private readonly Lazy<IReturnRepository> _returnRepository;
+        private readonly Lazy<ICustomerRepository> _customerRepository;
+        private readonly Lazy<IProductRepository> _ProductRepository;
+        private readonly Lazy<IShoppingRepository> _ShoppingRepository;
+        private readonly Lazy<IOrderRepository> _OrderRepository;
 
-        public RepositoryManager(RepositoryContext context) 
+
+        public RepositoryManager(RepositoryContext context)
         {
+
             _context = context;
-            _iadeRepository = new Lazy<ITradeRepository>(() => new TradeRepository(_context));
-           
-            _urunlerRepository = new Lazy<ITradeRepository<Urunler>>(() => new TradeRepository<Urunler>(_context));
-            _siparisRepository = new Lazy<ITradeRepository<Siparis>>(() => new TradeRepository<Siparis>(_context));
-            _sepetRepository = new Lazy<ITradeRepository<Sepet>>(() => new TradeRepository<Sepet>(_context));
-            _musteriRepository = new Lazy<ITradeRepository<Musteri>>(() => new TradeRepository<Musteri>(_context));
+            _returnRepository= new Lazy<IReturnRepository>(()=> new ReturnRepository(_context));
+            _customerRepository= new Lazy<ICustomerRepository>(()=> new CustomerRepository(_context));
+            _ProductRepository= new Lazy<IProductRepository>(()=> new ProductRepository(_context));
+            _ShoppingRepository = new Lazy<IShoppingRepository>(() => new ShoppingRepository(_context));
+            _OrderRepository= new Lazy<IOrderRepository>(()=> new OrderRepository(_context));
+
+
         }
 
 
-        public ITradeRepository<İade> İadeRepository => _iadeRepository.Value;
-        public ITradeRepository<Urunler> UrunlerRepository => _urunlerRepository.Value;
-        public ITradeRepository<Siparis> SiparisRepository => _siparisRepository.Value;
-        public ITradeRepository<Sepet> SepetRepository => _sepetRepository.Value;
-        public ITradeRepository.Musteri MusteriRepository => _musteriRepository.Value;
+        public IReturnRepository İade => _returnRepository.Value;
+
+        public IProductRepository Urunler =>  _ProductRepository.Value;
+
+        public IOrderRepository Siparis => _OrderRepository.Value;
+
+        public IShoppingRepository Sepet => _ShoppingRepository.Value;
+
+        public ICustomerRepository Musteri => _customerRepository.Value;
+
         public void Save()
         {
-            _context.SaveChanges();
+            _context.SaveChanges(); 
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Donem_Projesi.Model;
+﻿using Entities.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

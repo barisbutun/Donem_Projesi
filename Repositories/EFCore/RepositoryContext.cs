@@ -1,6 +1,8 @@
-﻿using Donem_Projesi.Model;
+﻿using Entities.Model;
+
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Repositories
 {
@@ -18,15 +20,23 @@ namespace Repositories
 
         public DbSet<Siparis> Siparisler { get; set; }
 
-        public DbSet<Kayitli_Musteri> Kayitli_Musteris { get; set; }
-        public DbSet<Mİsafir_musteri> mİsafir_Musteris { get; set; }
+        public DbSet<>
 
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.Entity<İade>().HasKey(i => i.iade_id);
+            modelBuilder.Entity<Urunler>().HasKey(u => u.UrunId);
+            modelBuilder.Entity<Musteri>().HasKey(m => m.Id);
+            modelBuilder.Entity<Sepet>().HasKey(s => s.SepetId);
+            modelBuilder.Entity<Siparis>().HasKey(s => s.SiparisID);
+          
 
 
         }
+
+       
+
 
 
     }

@@ -8,14 +8,13 @@ namespace Repositories.Concrats
 {
     public interface IRepositoryManager
     {
-        ITradeRepository  İade{ get; }
-        ITradeRepository Urunler { get; }
-        ITradeRepository  Siparis{ get; }
+        IReturnRepository  İade{ get; }
+        IProductRepository Urunler { get; }
+        IOrderRepository  Siparis{ get; }
 
-        ITradeRepository Sepet {  get; }    
+        IShoppingRepository Sepet {  get; }    
 
-
-        ITradeRepository Musteri { get; }
+        ICustomerRepository Musteri { get; }
         void Save();
 
     }

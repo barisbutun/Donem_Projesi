@@ -1,4 +1,4 @@
-﻿using Donem_Projesi.Model;
+﻿using Entities.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

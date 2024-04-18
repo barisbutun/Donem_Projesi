@@ -1,7 +1,7 @@
 ﻿
-using Donem_Projesi.Model;
+using Entities.Model;
 
-namespace Donem_Projesi.Model
+namespace Entities.Model
 {
     public class Siparis
     {

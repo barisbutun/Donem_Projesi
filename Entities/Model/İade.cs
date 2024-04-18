@@ -1,5 +1,7 @@
-﻿namespace Donem_Projesi.Model
-{
+﻿
+
+
+namespace Entities.Model;
     public class İade
     {
         int a;
@@ -31,4 +33,4 @@
 
 
     }
-}
+
