@@ -20,7 +20,7 @@ namespace Repositories
 
         public DbSet<Siparis> Siparisler { get; set; }
 
-        public DbSet<>
+        
 
        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,9 +30,6 @@ namespace Repositories
             modelBuilder.Entity<Musteri>().HasKey(m => m.Id);
             modelBuilder.Entity<Sepet>().HasKey(s => s.SepetId);
             modelBuilder.Entity<Siparis>().HasKey(s => s.SiparisID);
-          
-
-
         }
 
        

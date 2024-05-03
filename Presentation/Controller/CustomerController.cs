@@ -86,7 +86,7 @@ namespace Presentation.Controller
         }
 
         [HttpDelete("{id:int}")]
-        public IActionResult DeleteOneBook([FromRoute(Name = "id")] int id)
+        public IActionResult DeleteOneCustommer([FromRoute(Name = "id")] int id)
         {
             _manager.CustomerService.DeleteOneCustomer(id, false);
             return NoContent();

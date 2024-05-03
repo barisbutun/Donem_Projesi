@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities.DataTransferObject
 {
-    public record ProductDtoForUpdate(int UrunId,int BolgeID, string Parca_Adi, string Marka_Adi, int Adet_Sayisi)
+    public record ProductDtoForUpdate()
     {
         public int UrunId { get; set; }
         public int BolgeID { get; set; }
