@@ -265,6 +265,12 @@ body {
   padding: 200px;
   margin:-20px;
   margin-top: 50px;
+  animation: hareket 10s ease-in-out alternate ;
+}
+
+@keyframes hareket{
+  from{background-position: 220px 0px;}
+  to{background-position: -50px 0px;}
 }
 
 .hero-text {
@@ -316,8 +322,8 @@ body {
 }
 
 .product-card img {
-  width: 100%;
-  height: 200px;
+  width: 70%;
+  height:60%;
   object-fit: cover;
   margin-bottom: 10px;
 }
@@ -348,3 +354,44 @@ body {
   color: #333;
 }
   
+
+/* Genel Stil */
+
+.urunSayfasi {
+  display: flex; /* Ürünleri yatay olarak sıralayın */
+  flex-wrap: wrap; /* Birden fazla satırda görüntülemeyi etkinleştirin */
+  justify-content: space-between; /* Ürünleri eşit şekilde dağıtın */
+  padding: 20px; /* Sayfa kenar boşluğu ekleyin */
+}
+
+/* Ürün Grid */
+
+.urunGrid {
+  display: grid; /* Grid düzenini kullanın */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Her bir sütunun otomatik genişlikte olmasını sağlayın, minimum 250px ve maksimum ekran genişliği */
+  gap: 20px; /* Ürün kartları arasında boşluk ekleyin */
+}
+
+/* Ürün Kartı */
+
+.urunKartı {
+  border: 1px solid #ccc; /* Ürün kartlarına kenarlık ekleyin */
+  padding: 15px; /* Ürün kartlarında iç boşluk ekleyin */
+  text-align: center; /* Metni ortalayın */
+  cursor: pointer; /* Ürün kartı üzerine gelindiğinde imleci işaretçiye dönüştürün */
+}
+
+.urunKartı:hover {
+  background-color: #f0f0f0; /* Ürün kartı üzerine gelindiğinde arka plan rengini değiştirin */
+}
+
+.urunKartı img {
+  width: 100%; /* Resmin tam genişlikte görüntülenmesini sağlayın */
+  height: auto; /* Resmin orantılı yükseklikte görüntülenmesini sağlayın */
+  margin-bottom: 10px; /* Resim ve ürün adı arasında boşluk ekleyin */
+}
+
+.urunKartı h3 {
+  margin: 0; /* Başlık kenar boşluklarını kaldırın */
+  font-size: 18px; /* Başlık yazı tipi boyutunu ayarlayın */
+}

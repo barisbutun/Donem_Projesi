@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../logolar/login.png';
+import Arka_Kapı_Gergisi from '../Urunler/Arka_Kapı_Gergisi.png';
+import On_Panel from '../Urunler/On_Panel.png';
+import Yag_Filtresi from '../Urunler/Yag_Filtresi.png';
+import Sis_Farı_Lambası from '../Urunler/Sis_Farı_Lambası.png';
 const HomePage = () => {
   return (
     <div className="App">
@@ -27,7 +31,7 @@ const HomePage = () => {
           <div className="hero-text">
             <h2>Hoşgeldiniz!</h2>
             <p>En iyi ürünleri en uygun fiyatlarla keşfedin.</p>
-            <Link to="/urunler" className="btn">Ürünlere Göz At</Link>
+            <Link to="/Urunler" className="btn">Ürünlere Göz At</Link>
           </div>
         </section>
 
@@ -36,11 +40,33 @@ const HomePage = () => {
           <div className="product-grid">
             {/* Ürün kartlarını burada gösterin */}
             <div className="product-card">
-              <img src="" />
-              <h3>Ürün 1</h3>
-              <p>Fiyat: TL</p>
+              <img src={Arka_Kapı_Gergisi} />
+              <h3>Arka Kapı Gergisi</h3>
+              <p>200TL</p>
               <Link to="/urun/1" className="btn">Detaylara Git</Link>
             </div>
+
+            <div className="product-card">
+              <img src={On_Panel} />
+              <h3>Ön_Panel</h3>
+              <p>500TL</p>
+              <Link to="/urun/2" className="btn">Detaylara Git</Link>
+            </div>
+
+            <div className="product-card">
+              <img src={Yag_Filtresi} />
+              <h3>Yag_Filtresi</h3>
+              <p>800Tl</p>
+              <Link to="/urun/3" className="btn">Detaylara Git</Link>
+            </div>
+
+            <div className="product-card">
+              <img src={Sis_Farı_Lambası} />
+              <h3>Sis_farı_Lambası</h3>
+              <p>400Tl</p>
+              <Link to="/urun/4" className="btn">Detaylara Git</Link>
+            </div>
+
             {/* ... */}
           </div>
         </section>
