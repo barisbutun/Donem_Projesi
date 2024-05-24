@@ -9,7 +9,7 @@
 
         public int BolgeId { get; set; }
 
-        public Sepet(int SepetId) : base()
+        public Sepet(int SepetId)
         {
             UrunID = Urunler.UrunId;
             this.SepetId = SepetId;
