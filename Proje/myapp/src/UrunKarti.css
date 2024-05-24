@@ -1,0 +1,25 @@
+/* Ürün Kartı */
+
+.urunKartı {
+    border: 1px solid #ccc; /* Ürün kartlarına kenarlık ekleyin */
+    padding: 15px; /* Ürün kartlarında iç boşluk ekleyin */
+    text-align: center; /* Metni ortalayın */
+    cursor: pointer; /* Ürün kartı üzerine gelindiğinde imleci işaretçiye dönüştürün */
+  }
+  
+  .urunKartı:hover {
+    background-color: #f0f0f0; /* Ürün kartı üzerine gelindiğinde arka plan rengini değiştirin */
+  }
+  
+  .urunKartı img {
+    width: 100%; /* Resmin tam genişlikte görüntülenmesini sağlayın */
+    height: auto; /* Resmin orantılı yükseklikte görüntülenmesini sağlayın */
+    margin-bottom: 10px; /* Resim ve ürün adı arasında boşluk ekleyin */
+  }
+  
+  .urunKartı h3 {
+    margin: 0; /* Başlık kenar boşluklarını kaldırın */
+    font-size: 18px; /* Başlık yazı tipi boyutunu ayarlayın */
+  }
+  
+  

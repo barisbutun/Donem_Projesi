@@ -1,0 +1,137 @@
+  .container {
+    width: 40%;
+    height: 60%;
+    border: 2px solid rgba(0, 0, 0, 0.304);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(0.5px);
+    margin-left: 20px;
+  }
+
+  .login-kayit {
+    width: 100wh;
+    height: 100vh;
+    background-image: url("./logolar/GirisKayıtLogo.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    backdrop-filter: blur(5px);
+    border-image: fill 0 linear-gradient( #00000021,rgba(0, 0, 0, 0.332));
+    mix-blend-mode: multiply;
+  }
+
+  .username,
+  .password {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  .username input,
+  .password input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  a{
+    color:#fff;
+    text-decoration: none;
+  }
+  a:hover {
+    color: white;
+    text-decoration: underline;
+  }
+
+  .hata-mesajı {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  .isim label,
+  .email label,
+  .sifre label,
+  .telefon label {
+    font-size: 20px;
+    font-weight: 200;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: white;
+  }
+
+  .isim input,
+  .email input,
+  .sifre input,
+  .telefon input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+  }
+
+  .tab {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+    background-color: rgba(70, 69, 69, 0.716);
+    margin-right: 10px;
+  }
+
+  .tab.active {
+    background-color: rgb(51, 51, 54);
+  }
+
+  .content {
+    padding: 10px;
+  }
+
+  .buttonGiris {
+    padding: 10px 15px;
+    background-color: rgb(51, 51, 54);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .buttonKayit {
+    padding: 10px 15px;
+    background-color: rgb(51, 51, 54);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .buttonKayit:hover {
+    background-color: rgba(70, 69, 69, 0.716);
+  }
+
+  .buttonGiris:hover {
+    background-color: rgba(70, 69, 69, 0.716);
+  }

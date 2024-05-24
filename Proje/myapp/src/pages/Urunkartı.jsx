@@ -1,12 +1,15 @@
 import React from 'react';
-
-const Urunkartı = ({ resim, urunAdı, Fiyat, Acıklama }) => {
+import '../UrunKarti.css';
+const Urunkartı = ({ ürün }) => {
+  if(!ürün){
+    return <div>Yükleniyor...</div>;
+  }
   return (
-    <div className="urun-karti">
-      <img src={(`/Proje/myapp/src/Urunler${resim}`)} alt={urunAdı} />
-      <h3>{urunAdı}</h3>
-      <p>{Fiyat} TL</p>
-      <p>{Acıklama}</p>
+    <div className="urunKartı">
+      <img src={ürün.resim} alt={ürün.urunAdı} />
+      <h3>{ürün.urunAdı}</h3>
+      <p>{ürün.Fiyat} TL</p>
+      <p>{ürün.Acıklama}</p>
     </div>
   );
 };

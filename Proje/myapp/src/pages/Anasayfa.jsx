@@ -1,29 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../logolar/login.png';
+import logo from '../logolar/homelogo.png';
 import Arka_Kapı_Gergisi from '../Urunler/Arka_Kapı_Gergisi.png';
 import On_Panel from '../Urunler/On_Panel.png';
 import Yag_Filtresi from '../Urunler/Yag_Filtresi.png';
 import Sis_Farı_Lambası from '../Urunler/Sis_Farı_Lambası.png';
+import '../Anasayfa.css';
 const HomePage = () => {
   return (
     <div className="App">
       <header className="App-header">
           <img className="header-logo"src={logo} alt='logo' />
-        
         <nav className="header-nav">  {/* New navigation element */}
           <ul className="categories">
             <li><Link to="/kategoriler/elektronik">Elektronik</Link></li>
             {/* ... */}
           </ul>
         </nav>
-        <div className='headerButtons'>
-        <Link to="/Login" className='headerGiris'>Giris Yap</Link>
-        <Link to="/Kayit" className='headerKayıtOl'>Kaydol</Link>
-        <button className='menu-toggle'>☰</button>
-      
-        </div>
+      <div className='Arama'>
+      <input type="search" placeholder='Ara...' className='AramaCubugu'/>
+        <button className='Ara' type='submit'> Ara</button>
+      </div>
+   
+        <div className='headerButtons'> 
         
+        <Link to="/LoginKayıt" className='headerGirisKayıt'>Giris-Kayıt</Link>
+        <Link to="/Sepetim" className='sepet'>Sepetim</Link>
+        <button className='menu-toggle'>☰</button>
+        </div>
+       
       </header>
 
       <main className="App-main">
@@ -43,7 +48,7 @@ const HomePage = () => {
               <img src={Arka_Kapı_Gergisi} />
               <h3>Arka Kapı Gergisi</h3>
               <p>200TL</p>
-              <Link to="/urun/1" className="btn">Detaylara Git</Link>
+              <Link to="/urun/2" className="btn">Detaylara Git</Link>
             </div>
 
             <div className="product-card">
