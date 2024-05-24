@@ -172,7 +172,7 @@ function KayitForm({ onShowLogin }) {
             telefon: formData.telefon,
           };
     
-          fetch('/api/kayit', {
+          fetch('/Donem_Projesi/', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -183,9 +183,6 @@ function KayitForm({ onShowLogin }) {
             .then((responseData) => {
               if (responseData.success) {
                 // Kayıt işlemi sonrası yapılacak işlemleri buraya ekleyin
-                // Örneğin:
-                // - Kullanıcıyı ana sayfaya yönlendirin.
-                // - Başarılı kayıt mesajı gösterin.
                 console.log('Kayıt işlemi başarılı!');
                 alert('Kayıt işlemi başarıyla tamamlandı!');
                 onShowLogin(); // Giriş formuna geçiş
