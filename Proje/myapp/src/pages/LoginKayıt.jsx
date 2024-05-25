@@ -172,7 +172,7 @@ function KayitForm({ onShowLogin }) {
             telefon: formData.telefon,
           };
     
-          fetch('/Donem_Projesi/', {
+          fetch('/Presentation/Controller/CustomerController.cs', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
