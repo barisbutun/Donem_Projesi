@@ -3,51 +3,61 @@ import Urunkartı from './Urunkartı';
 import '../Urunler.css';
 
 const Urunler = () => {
-  const [urunlerDizisi, setUrunlerDizisi] = useState([]); // Ürün dizisi
-  const [sayfa, setSayfa] = useState(1); // Aktif sayfa
-  const [resimSayisi, setResimSayisi] = useState(10); // Sayfa başına resim sayısı
+  const [urunlerDizisi, setUrunlerDizisi] = useState([]);
+  const [sayfa, setSayfa] = useState(1);
+  const [resimSayisi, setResimSayisi] = useState(10);
 
-  // Ürünleri içe aktarma
   useEffect(() => {
     const yeniUrunlerDizisi = [];
-    const urunlerContext = require.context('../Urunler', true, /\.(png|jpg|jpeg)$/i);
+    const urunlerContext = require.context('../Urunler', false, /\.(png|jpg|jpeg)$/i);
 
     urunlerContext.keys().forEach((dosyaYolu) => {
-      const resim=urunlerContext(dosyaYolu);
-      const dosyaAdı = dosyaYolu.replace('../Urunler',''); // Dosya adını al
-      const urunAdı = dosyaAdı.replace(/\.[^/.]+$/, " "); // Ürün adını al
+      const resim = urunlerContext(dosyaYolu);
+      const dosyaAdı = dosyaYolu.replace('./', ''); // Dosya adını alın
+      const urunAdı = dosyaAdı.replace(/\.[^/.]+$/, ""); // Ürün adını alın (uzantıyı kaldırın)
 
       yeniUrunlerDizisi.push({
-        resim:resim,
+        resim: resim,
         urunAdı: urunAdı,
-        // ... diğer ürün bilgileri
+        Fiyat: Math.floor(Math.random() * 100) + 1, // Örnek fiyat
+        Acıklama: 'Bu bir örnek açıklamadır.' // Örnek açıklama
       });
     });
 
     setUrunlerDizisi(yeniUrunlerDizisi);
   }, []);
 
-  // Sayfa değiştirme işlevi
   const handleSayfaDegistir = (yeniSayfa) => {
     if (yeniSayfa > 0 && yeniSayfa <= Math.ceil(urunlerDizisi.length / resimSayisi)) {
       setSayfa(yeniSayfa);
     }
   };
 
-  // Resim sayısı değiştirme işlevi
   const handleResimSayisiDegistir = (yeniResimSayisi) => {
+    const maxSayfaSayisi = Math.ceil(urunlerDizisi.length / yeniResimSayisi);
+    if (sayfa > maxSayfaSayisi) {
+      setSayfa(maxSayfaSayisi);
+    }
     setResimSayisi(yeniResimSayisi);
   };
 
-  // Sayfanın ilk ve son indekslerini hesaplama
   const baslangicIndeks = (sayfa - 1) * resimSayisi;
   const bitisIndeks = baslangicIndeks + resimSayisi;
-
-  // Görünen ürünlerin dizisi
   const gorunenUrunler = urunlerDizisi.slice(baslangicIndeks, bitisIndeks);
 
+ 
   return (
     <section className="urunSayfasi">
+      <div className='urunGrid'>
+        {gorunenUrunler.length === 0 ? (
+          <p>Yükleniyor...</p>
+        ) : (
+          gorunenUrunler.map((urun, index) => (
+            <Urunkartı key={index} urun={urun} />
+          ))
+        )}
+      </div>
+
       <footer>
         <div className="sayfalama">
           <button onClick={() => handleSayfaDegistir(sayfa - 1)} disabled={sayfa === 1}>Önceki</button>
@@ -66,13 +76,17 @@ const Urunler = () => {
         </div>
       </footer>
 
-      <div className='urunGrid'> 
-      {urunlerDizisi.map((ürün,index) => (
-       <Urunkartı key={index} urun={ürün}/>
-      ))}
+      <div className='urunGrid'>
+        {gorunenUrunler.length === 0 ? (
+          <p>Yükleniyor...</p>
+        ) : (
+          gorunenUrunler.map((urun, index) => (
+            <Urunkartı key={index} urun={urun} />
+          ))
+        )}
       </div>
     </section>
-  )
+  );
 };
 
 export default Urunler;

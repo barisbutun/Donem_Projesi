@@ -1,0 +1,51 @@
+/* Genel Stil */
+.urun-detay {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .urun-detay h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .urun-detay img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .urun-detay p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  
+  .urun-detay button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .urun-detay button:hover {
+    opacity: 0.8;
+  }
+  
+  /* Mobil Cihazlar için Duyarlılık */
+  @media (max-width: 768px) {
+    .urun-detay {
+      padding: 10px;
+    }
+  
+    .urun-detay img {
+      height: 300px; /* Örnek: Mobil cihazlarda görsel yüksekliğini ayarlayın */
+    }
+  }
+  

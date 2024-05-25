@@ -5,21 +5,36 @@
     padding: 15px; /* Ürün kartlarında iç boşluk ekleyin */
     text-align: center; /* Metni ortalayın */
     cursor: pointer; /* Ürün kartı üzerine gelindiğinde imleci işaretçiye dönüştürün */
+    background-color: white;
   }
   
   .urunKartı:hover {
-    background-color: #f0f0f0; /* Ürün kartı üzerine gelindiğinde arka plan rengini değiştirin */
+    background-color:rgb(234, 232, 232) /* Ürün kartı üzerine gelindiğinde arka plan rengini değiştirin */
   }
   
   .urunKartı img {
     width: 100%; /* Resmin tam genişlikte görüntülenmesini sağlayın */
     height: auto; /* Resmin orantılı yükseklikte görüntülenmesini sağlayın */
     margin-bottom: 10px; /* Resim ve ürün adı arasında boşluk ekleyin */
+    object-fit: cover;
+   
   }
-  
   .urunKartı h3 {
     margin: 0; /* Başlık kenar boşluklarını kaldırın */
     font-size: 18px; /* Başlık yazı tipi boyutunu ayarlayın */
+    color: black;
   }
-  
-  
+/*   
+  .urunKartı button{
+    top:10px;
+    padding: 10px 15px;
+    background-color: rgb(51, 51, 54);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  } 
+
+  .urunKartı button:hover{
+    background-color: rgba(70, 69, 69, 0.716);
+  }*/
