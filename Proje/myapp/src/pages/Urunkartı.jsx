@@ -14,7 +14,6 @@ const Urunkartı = ({ urunId }) => {
 
     fetchUrun();
   }, [urunId]); // useEffect'i urunId'ye bağlı hale getirin
-
   if (!urun) {
     return <div>Yükleniyor...</div>;
   }
