@@ -150,3 +150,75 @@
 2024-05-25 18:30:32.1391 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
 2024-05-25 18:30:32.1470 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
 2024-05-25 18:30:32.1568 Info Configuration initialized.
+2024-05-25 18:46:09.2693 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-05-25 18:46:09.2947 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-05-25 18:46:09.2947 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
+2024-05-25 18:46:09.3129 Info Configuration initialized.
+2024-05-25 18:56:38.9234 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-05-25 18:56:38.9234 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-05-25 18:56:38.9416 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
+2024-05-25 18:56:38.9416 Info Configuration initialized.
+2024-05-25 20:23:48.9833 Info AppDomain Shutting down. LogFactory closing...
+2024-05-25 20:23:48.9955 Info LogFactory has been closed.
+2024-05-25 20:30:11.9831 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-05-25 20:30:11.9959 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-05-25 20:30:11.9959 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
+2024-05-25 20:30:12.0120 Info Configuration initialized.
+2024-05-25 20:32:43.9289 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-05-25 20:32:43.9289 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-05-25 20:32:43.9494 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
+2024-05-25 20:32:43.9494 Info Configuration initialized.
+2024-05-25 20:40:05.2411 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-05-25 20:40:05.2594 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-05-25 20:40:05.2594 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
+2024-05-25 20:40:05.2741 Info Configuration initialized.
+2024-05-25 20:49:37.6208 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-05-25 20:49:37.6459 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-05-25 20:49:37.6535 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
+2024-05-25 20:49:37.6535 Info Configuration initialized.
+2024-05-25 20:50:57.7180 Info AppDomain Shutting down. LogFactory closing...
+2024-05-25 20:50:57.7277 Info LogFactory has been closed.
+2024-05-25 20:51:02.6509 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-05-25 20:51:02.6640 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-05-25 20:51:02.6640 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
+2024-05-25 20:51:02.6844 Info Configuration initialized.
+2024-05-25 20:54:27.8616 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-05-25 20:54:27.8732 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-05-25 20:54:27.8732 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
+2024-05-25 20:54:27.8745 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-05-25 20:54:27.8871 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-05-25 20:54:27.8882 Info Configuration initialized.
+2024-05-25 20:54:27.8871 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
+2024-05-25 20:54:27.8871 Info Configuration initialized.
+2024-05-25 20:54:28.9038 Info AppDomain Shutting down. LogFactory closing...
+2024-05-25 20:54:28.9038 Info LogFactory has been closed.
+2024-05-25 20:54:46.7566 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-05-25 20:54:46.7566 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-05-25 20:54:46.7762 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
+2024-05-25 20:54:46.7865 Info Configuration initialized.
+2024-05-25 20:54:46.9601 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-05-25 20:54:46.9735 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-05-25 20:54:46.9823 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
+2024-05-25 20:54:46.9823 Info Configuration initialized.
+2024-05-25 20:54:47.5934 Info AppDomain Shutting down. LogFactory closing...
+2024-05-25 20:54:47.5934 Info LogFactory has been closed.
+2024-05-25 20:56:36.9711 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-05-25 20:56:36.9833 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-05-25 20:56:36.9833 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
+2024-05-25 20:56:36.9985 Info Configuration initialized.
+2024-05-25 20:56:37.2187 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-05-25 20:56:37.2331 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-05-25 20:56:37.2413 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
+2024-05-25 20:56:37.2413 Info Configuration initialized.
+2024-05-25 20:56:38.0437 Info AppDomain Shutting down. LogFactory closing...
+2024-05-25 20:56:38.0437 Info LogFactory has been closed.
+2024-05-25 21:01:58.4148 Info AppDomain Shutting down. LogFactory closing...
+2024-05-25 21:01:58.4271 Info LogFactory has been closed.
+2024-05-25 21:02:35.8362 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-05-25 21:02:35.8754 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-05-25 21:02:35.8880 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
+2024-05-25 21:02:35.9027 Info Configuration initialized.
+2024-05-25 21:48:04.0106 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-05-25 21:48:04.0616 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-05-25 21:48:04.0789 Info Validating config: TargetNames=logfile, ConfigItems=11, FilePath=C:\Users\Baris\source\repos\Donem_Projesi\Donem_Projesi\nlog.config
+2024-05-25 21:48:04.0990 Info Configuration initialized.
