@@ -253,7 +253,7 @@ function KayitForm({ onShowLogin }) {
     
           {errorMessage && <p className="hata-mesajı">{errorMessage}</p>}
     
-          <button type="submit" className="buttonKayit">
+          <button type="submit" onClick={handleSubmit} className="buttonKayit">
             Kaydol
           </button>
         </form>
