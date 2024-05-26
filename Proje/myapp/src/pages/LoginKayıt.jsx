@@ -121,6 +121,7 @@ function LoginForm({ onLogin }) {
 function KayitForm({ onShowLogin }) {
   const [formData, setFormData] = useState({
     name: '',
+    surname:'',
     email: '',
     sifre: '',
     telefon: '',
@@ -141,6 +142,7 @@ function KayitForm({ onShowLogin }) {
     let hata = false;
     if (
       formData.name === '' ||
+      formData.surname==''||
       formData.email === '' ||
       formData.sifre === '' ||
       formData.telefon === ''
@@ -155,12 +157,13 @@ function KayitForm({ onShowLogin }) {
     } else {
       const data = {
         name: formData.name,
+        surname:formData.surname,
         email: formData.email,
         sifre: formData.sifre,
         telefon: formData.telefon,
       };
 
-      fetch('/Presentation/Controller/CustomerController.cs', {
+      fetch('http://localhost:7242/api/Customer', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -204,6 +207,20 @@ function KayitForm({ onShowLogin }) {
           required
         />
       </div>
+      
+      <div className="soyisim">
+        <label htmlFor="soyisim">Soyadı:</label>
+        <input
+          type="text"
+          id="soyisim"
+          name="surname"
+          value={formData.surname}
+          onChange={handleChange}
+          placeholder="Soyadınızı girin"
+          required
+        />
+      </div>
+      
       <div className="email">
         <label htmlFor="email">Email:</label>
         <input

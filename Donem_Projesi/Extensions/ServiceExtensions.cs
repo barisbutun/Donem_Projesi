@@ -25,5 +25,20 @@ namespace Donem_Projesi.Extensions
         }
 
         public static void ConfigureLoggerService(this IServiceCollection services) => services.AddSingleton<ILoggerService, LoggerManager>();
+
+        public static void ConfigureCors(this IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000") // Adjust the origin as necessary
+                           .AllowAnyMethod()
+                           .AllowAnyHeader()
+                           .AllowCredentials(); // Add this if you are using cookies or authentication headers
+                });
+            });
+
+        }
     }
 }

@@ -11,7 +11,7 @@ using Repositories;
 namespace Donem_Projesi.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240413175755_Initial Migration")]
+    [Migration("20240525175447_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -44,6 +44,10 @@ namespace Donem_Projesi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Soyad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("sifre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
