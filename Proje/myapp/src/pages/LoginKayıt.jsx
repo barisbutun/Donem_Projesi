@@ -162,14 +162,14 @@ function KayitForm({ onShowLogin }) {
 
       fetch('/Presentation/Controller/CustomerController.cs', {
         method: 'POST',
+        body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+        }
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Network response was not ok: ' + response.statusText);
           }
           return response.json();
         })
@@ -185,7 +185,7 @@ function KayitForm({ onShowLogin }) {
         })
         .catch((error) => {
           console.error('There was a problem with the fetch operation:', error);
-          setErrorMessage('Kayıt işlemi sırasında bir hata oluştu.');
+          setErrorMessage('Kayıt işlemi sırasında bir hata oluştu. Hata mesajı: ' + error.message);
         });
     }
   };
