@@ -18,7 +18,7 @@ function LoginKayit() {
         <nav className="header-nav">
           <ul className="categories">
             <li><Link to="/kategoriler/elektronik">Elektronik</Link></li>
-            {/* ... */}
+            {/* Diğer kategoriler buraya eklenecek */}
           </ul>
         </nav>
         <div className='Arama'>
@@ -76,12 +76,7 @@ function LoginForm({ onLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let hata = false;
     if (formData.email === '' || formData.sifre === '') {
-      hata = true;
-    }
-
-    if (hata) {
       alert('Boşlukları doldurun');
     } else {
       onLogin(formData);
@@ -120,8 +115,8 @@ function LoginForm({ onLogin }) {
 
 function KayitForm({ onShowLogin }) {
   const [formData, setFormData] = useState({
-    name: '',
-    surname:'',
+    name: null,
+    surname:null,
     email: '',
     sifre: '',
     telefon: '',
@@ -142,7 +137,7 @@ function KayitForm({ onShowLogin }) {
     let hata = false;
     if (
       formData.name === '' ||
-      formData.surname==''||
+      formData.surname === '' ||
       formData.email === '' ||
       formData.sifre === '' ||
       formData.telefon === ''
@@ -163,16 +158,16 @@ function KayitForm({ onShowLogin }) {
         telefon: formData.telefon,
       };
 
-      fetch('http://localhost:7242/api/Customer', {
+      fetch('https://localhost:7242/api/Customer', {
         method: 'POST',
+        body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+        }
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Network response was not ok: ' + response.statusText);
           }
           return response.json();
         })
@@ -188,7 +183,7 @@ function KayitForm({ onShowLogin }) {
         })
         .catch((error) => {
           console.error('There was a problem with the fetch operation:', error);
-          setErrorMessage('Kayıt işlemi sırasında bir hata oluştu.');
+          setErrorMessage('Kayıt işlemi sırasında bir hata oluştu. Hata mesajı: ' + error.message);
         });
     }
   };
@@ -204,10 +199,10 @@ function KayitForm({ onShowLogin }) {
           value={formData.name}
           onChange={handleChange}
           placeholder="Adınızı girin"
-          required
+          
         />
       </div>
-      
+
       <div className="soyisim">
         <label htmlFor="soyisim">Soyadı:</label>
         <input
@@ -216,11 +211,11 @@ function KayitForm({ onShowLogin }) {
           name="surname"
           value={formData.surname}
           onChange={handleChange}
-          placeholder="Soyadınızı girin"
-          required
+          placeholder="Adınızı girin"
+        
         />
       </div>
-      
+
       <div className="email">
         <label htmlFor="email">Email:</label>
         <input
@@ -230,7 +225,7 @@ function KayitForm({ onShowLogin }) {
           value={formData.email}
           onChange={handleChange}
           placeholder="Emailinizi girin"
-          required
+         
         />
       </div>
       <div className="sifre">
@@ -242,7 +237,7 @@ function KayitForm({ onShowLogin }) {
           value={formData.sifre}
           onChange={handleChange}
           placeholder="Şifrenizi girin"
-          required
+        
         />
       </div>
       <div className="telefon">
@@ -254,7 +249,7 @@ function KayitForm({ onShowLogin }) {
           value={formData.telefon}
           onChange={handleChange}
           placeholder="Telefon numaranızı girin"
-          required
+       
         />
       </div>
       {errorMessage && <p className="hata-mesajı">{errorMessage}</p>}

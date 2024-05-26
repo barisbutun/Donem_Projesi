@@ -1,11 +1,9 @@
-
 using Microsoft.EntityFrameworkCore;
 using Repositories.EFCore;
 using Donem_Projesi.Extensions;
 using Newtonsoft.Json;
 using NLog;
 using Services.Concrat;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +13,8 @@ builder.Services.AddControllers(config =>
 {
     config.RespectBrowserAcceptHeader = true;
 })
-                       .AddApplicationPart(typeof(Presentation.AssemblyRefence).Assembly)
-                       .AddNewtonsoftJson();
-
+    .AddApplicationPart(typeof(Presentation.AssemblyRefence).Assembly)
+    .AddNewtonsoftJson();
 
 // Add services to the container.
 
@@ -35,10 +32,7 @@ var app = builder.Build();
 
 var logger = app.Services.GetRequiredService<ILoggerService>();
 
-
 app.ConfigureExceptionHandler(logger);
-
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -48,10 +42,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// CORS middleware should be placed before UseAuthorization
 app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 
 app.MapControllers();
- 
+
 app.Run();

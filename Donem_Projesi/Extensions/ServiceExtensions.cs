@@ -28,11 +28,12 @@ namespace Donem_Projesi.Extensions
 
         public static void ConfigureCors(this IServiceCollection services)
         {
+            
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 {
-                    builder.WithOrigins("http://localhost:3000") // Adjust the origin as necessary
+                    builder.WithOrigins("http://localhost:3000", "http://localhost:3000") // Adjust the origin as necessary
                            .AllowAnyMethod()
                            .AllowAnyHeader()
                            .AllowCredentials(); // Add this if you are using cookies or authentication headers
