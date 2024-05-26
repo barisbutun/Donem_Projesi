@@ -18,7 +18,7 @@ function LoginKayit() {
         <nav className="header-nav">
           <ul className="categories">
             <li><Link to="/kategoriler/elektronik">Elektronik</Link></li>
-            {/* Diğer kategoriler buraya eklenecek */}
+            {/* Other categories go here */}
           </ul>
         </nav>
         <div className='Arama'>
@@ -78,9 +78,10 @@ function LoginForm({ onLogin }) {
 
     if (formData.email === '' || formData.sifre === '') {
       alert('Boşlukları doldurun');
-    } else {
-      onLogin(formData);
+      return;
     }
+
+    onLogin(formData);
   };
 
   return (
@@ -115,8 +116,8 @@ function LoginForm({ onLogin }) {
 
 function KayitForm({ onShowLogin }) {
   const [formData, setFormData] = useState({
-    name: null,
-    surname:null,
+    name: '',
+    surname: '',
     email: '',
     sifre: '',
     telefon: '',
@@ -134,7 +135,6 @@ function KayitForm({ onShowLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let hata = false;
     if (
       formData.name === '' ||
       formData.surname === '' ||
@@ -142,50 +142,48 @@ function KayitForm({ onShowLogin }) {
       formData.sifre === '' ||
       formData.telefon === ''
     ) {
-      hata = true;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      hata = true;
+      alert('Tüm alanları doldurmanız gerekmektedir.');
+      return;
     }
 
-    if (hata) {
-      alert('Tüm alanları doldurmanız ve geçerli bir e-posta girmeniz gerekmektedir.');
-    } else {
-      const data = {
-        name: formData.name,
-        surname:formData.surname,
-        email: formData.email,
-        sifre: formData.sifre,
-        telefon: formData.telefon,
-      };
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      alert('Geçerli bir e-posta girmeniz gerekmektedir.');
+      return;
+    }
 
-      fetch('https://localhost:7242/api/Customer', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json',
+    const data = {
+      Ad: formData.name,
+      Soyad: formData.surname,
+      email: formData.email,
+      sifre: formData.sifre,
+      telefon: formData.telefon,
+    };
+
+    fetch('https://localhost:7242/api/Customer', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok: ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then((responseData) => {
+        if (responseData.success) {
+          alert('Kayıt işlemi başarıyla tamamlandı!');
+          onShowLogin(); // Giriş formuna geçiş
+        } else {
+          setErrorMessage(responseData.error);
         }
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok: ' + response.statusText);
-          }
-          return response.json();
-        })
-        .then((responseData) => {
-          if (responseData.success) {
-            console.log('Kayıt işlemi başarılı!');
-            alert('Kayıt işlemi başarıyla tamamlandı!');
-            onShowLogin(); // Giriş formuna geçiş
-          } else {
-            console.log('Kayıt işlemi başarısız!');
-            setErrorMessage(responseData.error);
-          }
-        })
-        .catch((error) => {
-          console.error('There was a problem with the fetch operation:', error);
-          setErrorMessage('Kayıt işlemi sırasında bir hata oluştu. Hata mesajı: ' + error.message);
-        });
-    }
+      .catch((error) => {
+        console.error('There was a problem with the fetch operation:', error);
+        setErrorMessage('Kayıt işlemi sırasında bir hata oluştu. Hata mesajı: ' + error.message);
+      });
   };
 
   return (
@@ -199,10 +197,10 @@ function KayitForm({ onShowLogin }) {
           value={formData.name}
           onChange={handleChange}
           placeholder="Adınızı girin"
-          
+          required
         />
       </div>
-
+      
       <div className="soyisim">
         <label htmlFor="soyisim">Soyadı:</label>
         <input
@@ -211,11 +209,11 @@ function KayitForm({ onShowLogin }) {
           name="surname"
           value={formData.surname}
           onChange={handleChange}
-          placeholder="Adınızı girin"
-        
+          placeholder="Soyadınızı girin"
+          required
         />
       </div>
-
+      
       <div className="email">
         <label htmlFor="email">Email:</label>
         <input
@@ -225,7 +223,7 @@ function KayitForm({ onShowLogin }) {
           value={formData.email}
           onChange={handleChange}
           placeholder="Emailinizi girin"
-         
+          required
         />
       </div>
       <div className="sifre">
@@ -237,7 +235,7 @@ function KayitForm({ onShowLogin }) {
           value={formData.sifre}
           onChange={handleChange}
           placeholder="Şifrenizi girin"
-        
+          required
         />
       </div>
       <div className="telefon">
@@ -249,7 +247,7 @@ function KayitForm({ onShowLogin }) {
           value={formData.telefon}
           onChange={handleChange}
           placeholder="Telefon numaranızı girin"
-       
+          required
         />
       </div>
       {errorMessage && <p className="hata-mesajı">{errorMessage}</p>}
