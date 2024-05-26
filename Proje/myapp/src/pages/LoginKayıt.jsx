@@ -142,7 +142,7 @@ function KayitForm({ onShowLogin }) {
     let hata = false;
     if (
       formData.name === '' ||
-      formData.surname==''||
+      formData.surname===''||
       formData.email === '' ||
       formData.sifre === '' ||
       formData.telefon === ''
@@ -156,8 +156,8 @@ function KayitForm({ onShowLogin }) {
       alert('Tüm alanları doldurmanız ve geçerli bir e-posta girmeniz gerekmektedir.');
     } else {
       const data = {
-        name: formData.name,
-        surname:formData.surname,
+        Ad: formData.name,
+        Soyad: formData.surname,
         email: formData.email,
         sifre: formData.sifre,
         telefon: formData.telefon,
