@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../LoginKayıt.css';
 import '../Anasayfa.css';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
 import logo from '../logolar/homelogo.png';
 
 function LoginKayit() {
@@ -11,14 +11,31 @@ function LoginKayit() {
     setActiveTab(tabName);
   };
 
+  const initialCategories = [
+    { id: 1, name: 'Kategori 1', path: '/kategori1' },
+    { id: 2, name: 'Kategori 2', path: '/kategori2' },
+    { id: 3, name: 'Kategori 3', path: '/kategori3' },
+  ];
+
+  const [categories] = useState(initialCategories); // Sabit kategoriler
+  const [showCategories, setShowCategories] = useState(false); // Kategorileri toggle etmek için
+
+  const toggleCategories = () => {
+    setShowCategories(!showCategories); // Kategorilerin görünürlüğünü değiştir
+  };
   return (
     <div className="login-kayit">
       <header className="App-header">
-        <img className="header-logo" src={logo} alt="logo" />
         <nav className="header-nav">
-          <ul className="categories">
-            <li><Link to="/kategoriler/elektronik">Elektronik</Link></li>
-            {/* ... */}
+          <button className="menu-toggle" onClick={toggleCategories}>
+            ☰
+          </button>
+          <ul className={`categories ${showCategories ? 'show' : ''}`}>
+            {categories.map((category) => (
+              <li key={category.id}>
+                <Link to={category.path}>{category.name}</Link>
+              </li>
+            ))}
           </ul>
         </nav>
         <div className='Arama'>
@@ -26,9 +43,9 @@ function LoginKayit() {
           <button className='Ara' type='submit'>Ara</button>
         </div>
         <div className='headerButtons'>
-          <Link to="/LoginKayıt" className='headerGirisKayıt'>Giris-Kayıt</Link>
+          <Link to="/LoginKayıt" className='headerGirisKayıt'>Giriş-Kayıt</Link>
           <Link to="/Sepetim" className='sepet'>Sepetim</Link>
-          <button className='menu-toggle'>☰</button>
+          <img className="header-logo" src={logo} alt="logo" />
         </div>
       </header>
       <div className="container">
@@ -163,7 +180,7 @@ function KayitForm({ onShowLogin }) {
         telefon: formData.telefon,
       };
 
-      fetch('http://localhost:7242/api/Customer', {
+      fetch('https://localhost:7242/api/Customer', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {

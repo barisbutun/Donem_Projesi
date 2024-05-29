@@ -1,247 +1,301 @@
 .App {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color:rgba(7, 7, 7, 0.358);
+}
+
+.header-logo {
+position: absolute;
+margin-top: 0;
+margin-bottom: 0;
+margin-left:20px;
+transform: scale(0.18);
+background-color: transparent;
+background-clip: opacity(0.5);
+}
+
+.App-header {
+  top:0;
+  left:0;
+  height:auto;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(7, 7, 7, 0.09);
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
+  position:fixed;
+}
+
+.App-header::before {
+  content: ''; /* Empty content for pseudo-element */
+  position: absolute; /* Position the pseudo-element absolutely */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: inherit; /* Inherit header background color */
+  z-index: -1; /* Place it behind the header content */
+}
+
+.headerButtons {
+  display: flex;
+  align-items: center;
+  z-index: 1; /* Maintain z-index for stacking */
+}
+
+.menu-toggle {
+  display: inline-block;
+  padding: 10px 15px;
+  border: none;
+  background: none;
+  background-color: transparent;
+  color: rgba(11, 11, 11, 0.988);
+  font-size: 2.0rem; 
+  cursor: pointer;
+}    
+     
+/* Optional Media Query Example (adjust as needed) */
+@media (max-width: 768px) {
   .header-logo {
-    position: absolute;
-    margin-top: 0px;
-    margin-bottom:0;
-    margin-left:-220px;
-    transform:scale(0.13);
-    background-color: transparent;
-    background-clip:opacity(0.5);
-  }
-  .App-header {
-    top:0;
-    left:0;
-    height:auto;
-    width: 100%;
-    z-index: 1000;
-    background-color: rgba(7, 7, 7, 0.09);
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between;
-    position:fixed;
-  }
-  .App-header::before {
-    content: ''; /* Empty content for pseudo-element */
-    position: absolute; /* Position the pseudo-element absolutely */
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: inherit; /* Inherit header background color */
-    z-index: -1; /* Place it behind the header content */
-  }
-  .headerButtons {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    align-items: center;
-    z-index: 1; /* Set a high z-index to place it above header content */
+    margin-right: 10px; /* Adjust spacing for smaller screens */
   }
   .menu-toggle {
-    display: inline-block;
-    margin-left: 0; /* Remove default margin */
-    padding: 10px 15px;
-    border: none; /* Remove border */
-    background-color: transparent; /* Make it transparent */
-    color: rgba(11, 11, 11, 0.988); /* Set white color for lines */
-    font-size: 20px; /* Adjust font size as needed */
-    cursor: pointer;
+    font-size: 1.2rem; /* Adjust font size for smaller screens */
   }
-  .menu-toggle:hover{
-    color:#fff;
-  }
+}
 
-  .headerGirisKayıt{
-    display: inline-block;
-    padding: 10px 15px;
-    background-color:rgb(51, 51, 54);
-    color: #fff;
-    border:none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-left: 10px;
-    margin-top: 10px;
-    text-decoration: none;
-  
-  }
-  .headerGirisKayıt:hover{
-    background-color:rgba(70, 69, 69, 0.716);
-  }
+.menu-toggle:hover {
+  color: #fff;
+}
 
-  .sepet{
-    display: inline-block;
-    padding: 10px 15px;
-    background-color:rgb(51, 51, 54);
-    color: #fff;
-    border:none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-right: 10px;
-    text-decoration: none;
-  }
+.headerGirisKayıt {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: rgb(51, 51, 54);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-top: 10px;
+  text-decoration: none;
+}
 
-  .sepet:hover{
-    background-color:rgba(70, 69, 69, 0.716);
-  }
-  .Arama{
-    margin-left:120px;
-    margin-top:20px;
-    margin-bottom:10px ;
-    width: 50%;
-  }
+.headerGirisKayıt:hover {
+  background-color: rgba(70, 69, 69, 0.716);
+}
+
+.sepet {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: rgb(51, 51, 54);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-right: 100px;
+  text-decoration: none;
+}
+
+.sepet:hover {
+  background-color: rgba(70, 69, 69, 0.716);
+}
+
+.Arama {
+  margin-left: 120px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 50%;
+  margin-bottom: 10px;
+}
+
 .AramaCubugu {
-    width: 70%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border:none;
-    border-radius: 10px;
-    
-  }
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border: none;
+  border-radius: 10px;
+}
 
-.Ara{
-    display: inline-block;
-    padding: 10px 15px;
-    background-color:rgb(51, 51, 54);
-    color: #fff;
-    border:none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-left: 10px;
-  }
-  
-  .Ara:hover{
-    background-color:rgba(70, 69, 69, 0.716);
-  }
+.Ara {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: rgb(51, 51, 54);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 10px;
+}
 
-  .header-nav {
-    display: none;  /* Initially hidden */
+.Ara:hover {
+  background-color: rgba(70, 69, 69, 0.716);
+}
+
+.header-nav {
+  position: relative; /* Make it relative to its parent (header) */
+  align-items: center; /* Align items vertically in the center */
+  justify-content: space-between; /* Distribute items horizontally with space between */
+  display: inline-block;
+  margin-right: 0; /* Remove default margin */
+  padding: 10px 15px;
+  border: none; /* Remove border */
+  background-color: transparent; /* Make it transparent */
+  color: rgba(11, 11, 11, 0.988); /* Set white color for lines */
+  font-size: 20px; /* Adjust font size as needed */
+  cursor: pointer;
+}
+
+.categories {
+  display: none; /* Başlangıçta gizli */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 70px; /* Menü butonunun hemen altında */
+  left: 0px; /* Sol kenara hizala */
+  width: 200px; /* Kategori genişliği */
+  height: 100vh; /* Sayfanın tam boyu */
+  background-color: rgba(51, 51, 54, 0.9); /* Arka plan rengi */
+  overflow-y: auto; /* Dikey kaydırma */
+  border-radius: 0; /* Köşeleri düz bırak */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Gölge efekti */
+  z-index: 1000; /* Diğer öğelerin üstünde görünmesi için */
+  scrollbar-width: none; /* Firefox için kaydırma çubuğunu gizle */
+}
+
+.categories::-webkit-scrollbar {
+  display: none; /* Webkit tabanlı tarayıcılar için kaydırma çubuğunu gizle */
+}
+
+.categories.show {
+  display: block; /* Görünür hale getir */
+}
+
+.categories li {
+  margin-bottom: 0; /* Alt marjı kaldır */
+  padding: 15px 30px; /* İç boşluk */
+  cursor: pointer; /* Tıklanabilir işaretçi */
+}
+
+.categories a {
+  color: white; /* Yazı rengi */
+  text-decoration: none; /* Altı çizili olmasın */
+  display: block;
+  font-size: 16px; /* Yazı boyutu */
+}
+
+.categories li:hover {
+  background-color: rgba(95, 93, 93, 0.9); /* Üzerine gelindiğinde arka plan rengi */
+}
+
+
+.App-main {
+  flex: 1;
+  padding: 0px;
+  margin: 0px;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-image: url('./logolar/fiat.png');
+  background-size: cover;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 0px;
+  animation: hareket 10s ease-in-out alternate;
+}
+
+@keyframes hareket {
+  from {
+    background-position: 220px 0px;
   }
-  
-  .header-nav.show {
-    display: flex;  /* Show menu on toggle */
+  to {
+    background-position: -50px 0px;
   }
-  
-  .categories {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  
-  .App-main {
-    flex: 1;
-    padding:0px;
-    margin:0px;
-  }
-  
-  .hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-image: url('./logolar/fiat.png');
-    background-size: cover;
-    padding:0px;
-    margin:0px;
-    margin-top:0px;
-    animation: hareket 10s ease-in-out alternate ;
-  }
-  
-  @keyframes hareket{
-    from{background-position: 220px 0px;}
-    to{background-position: -50px 0px;}
-  }
-  
-  .hero-text {
-    text-align: left;
-    display: flex;
-    flex-direction: column; /* Arrange items vertically */
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin-top:100px;
-    margin-bottom: 350px;
-    margin-right: 100px;
-    margin-left:50px;
-  }
-  
-  .hero-text h2 {
-    font-size: 50px;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column; 
-    align-items: flex-start;
-  }
-  
-  .hero-text p {
-    margin: 0; 
-    padding: 0;
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 10px;
-  }
-  
-  .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: rgb(51, 51, 54);
-    color: #fff;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-  }
-  
-  /* Ürün kartları */
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-  }
-  
-  .product-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .product-card img {
-    width: 70%;
-    height:60%;
-    object-fit: cover;
-    margin-bottom: 10px;
-  }
-  
-  .product-card h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-  
-  .product-card p {
-    font-size: 14px;
-    margin-bottom: 15px;
-  }
-  
-  /* Kategoriler */
-  .category-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .category-list li {
-    margin-bottom: 10px;
-  }
-  
-  .category-list a {
-    text-decoration: none;
-    color: #333;
-  }
-  
+}
+
+.hero-text {
+  text-align: left;
+  display: flex;
+  flex-direction: column; /* Arrange items vertically */
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 100px;
+  margin-bottom: 350px;
+  margin-right: 100px;
+  margin-left: 50px;
+}
+
+.hero-text h2 {
+  font-size: 50px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color:black;
+}
+
+.hero-text p {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: rgb(51, 51, 54);
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+/* Ürün kartları */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.product-card img {
+  width: 70%;
+  height: 60%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.featured-products h2 {
+  font-size: 26px;
+  margin-bottom: 5px;
+  color:black;
+}
+
+.product-card h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color:black;
+}
+
+.product-card p {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
