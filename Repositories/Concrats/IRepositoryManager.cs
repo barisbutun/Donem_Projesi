@@ -15,7 +15,7 @@ namespace Repositories.Concrats
         IShoppingRepository Sepet {  get; }    
 
         ICustomerRepository Musteri { get; }
-        void Save();
+        Task SaveAsync();
 
     }
 }

@@ -28,7 +28,7 @@ namespace Services
         public İade CreateOneReturn(İade returnEntity)
         {
             _manager.İade.CreateOneReturn(returnEntity);
-            _manager.Save();
+            _manager.SaveAsync();
             return returnEntity;
         }
 
@@ -40,7 +40,7 @@ namespace Services
                 throw new ReturnNotFoundException(id);
             }
             _manager.İade.DeleteOneReturn(entity);
-            _manager.Save();
+            _manager.SaveAsync();
         }
 
         public IEnumerable<İade> GetAllReturn(bool trackChanges)
@@ -69,7 +69,7 @@ namespace Services
 
             entity = _mapper.Map<İade>(returnDto);
             _manager.İade.UpdateOneReturn(entity);
-            _manager.Save();
+            _manager.SaveAsync();
         }
 
     }

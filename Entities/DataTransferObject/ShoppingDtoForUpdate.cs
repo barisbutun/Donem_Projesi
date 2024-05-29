@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace Entities.DataTransferObject
 {
-    public class ShoppingDtoForUpdate(Urunler Urunler, int SepetId, int UrunID,int BolgeId)
+    public class ShoppingDtoForUpdate
     {
-        Urunler Urunler { get; set; }
         public int SepetId { get; set; }
 
-        public int UrunID { get; set; }
+        public int UrunId { get; set; }
 
         public int BolgeId { get; set; }
+
+
 
 
     }

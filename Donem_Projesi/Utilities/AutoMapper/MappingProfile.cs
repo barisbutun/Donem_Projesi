@@ -11,10 +11,20 @@ namespace Donem_Projesi.Utilities.AutoMapper
         {
 
             CreateMap<CustomerDtoForUpdate,Musteri>();
+            CreateMap<Musteri,CustomerDtoForUpdate>();  
+
+
             CreateMap<ProductDtoForUpdate, Urunler>();
+            CreateMap<Urunler,ProductDtoForUpdate>();
+
+            CreateMap<Urunler, ProductDto>();
+            CreateMap<ProductDto, Urunler>();
+
             CreateMap<ShoppingDtoForUpdate, Sepet>();
             CreateMap<OrderDtoForUpdate, Sepet>();
             CreateMap<ReturnDtoForUpdate, İade>();
+            CreateMap<Musteri, CustomerDto>();
+            CreateMap<CustomerDto, Musteri>();
 
 
 

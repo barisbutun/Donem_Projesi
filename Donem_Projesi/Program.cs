@@ -4,6 +4,10 @@ using Donem_Projesi.Extensions;
 using Newtonsoft.Json;
 using NLog;
 using Services.Concrat;
+using Microsoft.AspNetCore.Mvc;
+using Presentation.ActionFilters;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,20 +15,35 @@ LogManager.LoadConfiguration(Path.Combine(Directory.GetCurrentDirectory(), "nlog
 
 builder.Services.AddControllers(config =>
 {
+    config.RespectBrowserAcceptHeader = true; 
     config.RespectBrowserAcceptHeader = true;
 })
+    
     .AddApplicationPart(typeof(Presentation.AssemblyRefence).Assembly)
-    .AddNewtonsoftJson();
+    .AddNewtonsoftJson(config=>
+    {
+        config.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+
+    });
+builder.Services.AddScoped<ValidationFilterAttribute>();
+
+
 
 // Add services to the container.
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureLoggerService();
+builder.Services.ConfigureActionFilters();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.ConfigureCors();
 

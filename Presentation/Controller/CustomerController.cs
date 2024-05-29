@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Presentation.ActionFilters;
 
 namespace Presentation.Controller
 {
@@ -24,26 +25,34 @@ namespace Presentation.Controller
 
             _manager = manager; 
         }
-
+        [ServiceFilter(typeof(LogFilterAttribute))]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost] 
         public async Task<IActionResult> CreateOneCustomer([FromBody]  Musteri musteri)
         {
-
-            if(musteri is null)
+            /*if(musteri is null)
             {
                 return BadRequest();
+            }*/
+            /*if(!ModelState.IsValid)
+               return UnprocessableEntity(ModelState); Eylem filtrelerinde attribute sayesinde tekrarlı kodları yazmamıza gerek yok
+              */
+           if(musteri == null) {
 
+                return BadRequest();
             }
-            _manager.CustomerService.CreateOneCustomer(musteri);
-            return StatusCode(201, musteri);
+          var customer=await _manager.CustomerService.CreateOneCustomerAsync(musteri);
 
+            return StatusCode(201, customer);
 
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllCustomer()
         {
-          var Customer = _manager.CustomerService.GetAllCustomer(false);
+          var Customer =  await _manager.CustomerService.GetAllCustomerAsync(false);
+
+
 
             return Ok(Customer);
 
@@ -60,7 +69,7 @@ namespace Presentation.Controller
                 return BadRequest();
 
             }
-            _manager.CustomerService.UpdateOneCustomer(id, customerDto, true);
+           await _manager.CustomerService.UpdateOneCustomerAsync(id, customerDto, true);
             return NoContent();
 
 
@@ -68,10 +77,7 @@ namespace Presentation.Controller
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetOneCustomer([FromRoute(Name = "id")] int id)
         {
-
-
-
-            var  oneCustomer = _manager.CustomerService.GetOneCustomerById(id, false);
+            var  oneCustomer = _manager.CustomerService.GetOneCustomerByIdAsync(id, false);
 
             if(oneCustomer is null)
             {
@@ -88,23 +94,36 @@ namespace Presentation.Controller
         [HttpDelete("{id:int}")]
         public IActionResult DeleteOneCustommer([FromRoute(Name = "id")] int id)
         {
-            _manager.CustomerService.DeleteOneCustomer(id, false);
+            _manager.CustomerService.DeleteOneCustomerAsync(id, false);
             return NoContent();
         }
 
 
         [HttpPatch("{id:int}")]
 
-        public IActionResult PartiallyUpdateOneCustomer([FromRoute(Name="id")]int id,
-            [FromBody] JsonPatchDocument<Musteri> customerPatch)
+        public async Task<IActionResult> PartiallyUpdateOneCustomer([FromRoute(Name="id")]int id,
+            [FromBody] JsonPatchDocument<CustomerDtoForUpdate> customerPatch)
         {
-            var entity = _manager.CustomerService.GetOneCustomerById(id, true);
 
-            customerPatch.ApplyTo(entity);
-            _manager.CustomerService.UpdateOneCustomer(id,new CustomerDtoForUpdate(),true);
+            if(customerPatch is null)
+            {
 
-            return NoContent();
+                return BadRequest();    
+            }
+            var result = await _manager.CustomerService.GetOneCustomerForPatchAsync(id, false);
 
+            customerPatch.ApplyTo(result.CustomerDtoForUpdate, ModelState);
+
+            TryValidateModel(result.CustomerDtoForUpdate);
+
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
+
+            _manager.CustomerService.SaveChangesForPatchAsync(result.CustomerDtoForUpdate, result.musteri);
+
+
+
+            return NoContent(); // İçerik yok (204) durumunu döndür
 
         }
 

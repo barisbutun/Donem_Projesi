@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace Entities.DataTransferObject
 {
-    public class OrderDtoForUpdate(Musteri _musteri, int SiparisID, int bolgeId)
+    public class OrderDtoForUpdate
     {
-        
+
 
         public int SiparisID { get; set; }
-        Musteri musteri { get; set; }
-
-        int bolgeId;
-
+        public int UrunID { get; set; } // Foreign key property
+        public Urunler urunler { get; set; }
 
 
     }

@@ -42,9 +42,9 @@ namespace Repositories.EFCore
 
         public ICustomerRepository Musteri => _customerRepository.Value;
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            _context.SaveChanges(); 
+          await  _context.SaveChangesAsync(); 
         }
     }
 }

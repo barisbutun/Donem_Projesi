@@ -64,7 +64,7 @@ namespace Donem_Projesi.Migrations
                     b.Property<int>("BolgeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UrunID")
+                    b.Property<int>("UrunId")
                         .HasColumnType("int");
 
                     b.HasKey("SepetId");
@@ -80,12 +80,15 @@ namespace Donem_Projesi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SiparisID"));
 
-                    b.Property<int>("_musteriId")
+                    b.Property<int>("UrunID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UrunlerUrunId")
                         .HasColumnType("int");
 
                     b.HasKey("SiparisID");
 
-                    b.HasIndex("_musteriId");
+                    b.HasIndex("UrunlerUrunId");
 
                     b.ToTable("Siparisler");
                 });
@@ -112,6 +115,9 @@ namespace Donem_Projesi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
                     b.HasKey("UrunId");
 
                     b.ToTable("Urunler");
@@ -128,55 +134,23 @@ namespace Donem_Projesi.Migrations
                     b.Property<int>("BolgeID_iade")
                         .HasColumnType("int");
 
-                    b.Property<int>("Siparis_iadeSiparisID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UrunId_iade")
-                        .HasColumnType("int");
-
                     b.Property<int>("siparis_iade")
                         .HasColumnType("int");
 
-                    b.Property<int>("urun_iadeUrunId")
-                        .HasColumnType("int");
-
                     b.HasKey("iade_id");
-
-                    b.HasIndex("Siparis_iadeSiparisID");
-
-                    b.HasIndex("urun_iadeUrunId");
 
                     b.ToTable("İade");
                 });
 
             modelBuilder.Entity("Entities.Model.Siparis", b =>
                 {
-                    b.HasOne("Entities.Model.Musteri", "_musteri")
+                    b.HasOne("Entities.Model.Urunler", "Urunler")
                         .WithMany()
-                        .HasForeignKey("_musteriId")
+                        .HasForeignKey("UrunlerUrunId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("_musteri");
-                });
-
-            modelBuilder.Entity("Entities.Model.İade", b =>
-                {
-                    b.HasOne("Entities.Model.Siparis", "Siparis_iade")
-                        .WithMany()
-                        .HasForeignKey("Siparis_iadeSiparisID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Model.Urunler", "urun_iade")
-                        .WithMany()
-                        .HasForeignKey("urun_iadeUrunId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Siparis_iade");
-
-                    b.Navigation("urun_iade");
+                    b.Navigation("Urunler");
                 });
 #pragma warning restore 612, 618
         }

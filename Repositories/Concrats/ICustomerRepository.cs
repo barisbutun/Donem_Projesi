@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Repositories.Concrats
 {
-    public interface ICustomerRepository:IRepositoryBase<Musteri>
+    public interface ICustomerRepository : IRepositoryBase<Musteri>
     {
 
-        IQueryable<Musteri> GetAllCustomer(bool trackChanges);
-        Musteri GetOneCustomerById(int id, bool trackChanges);
+        Task<IQueryable<Musteri>> GetAllCustomerAsync(bool trackChanges);
+        Task<Musteri> GetOneCustomerByIdAsync(int id, bool trackChanges);
 
         void CreateOneCustomer(Musteri Customer);
         void UpdateOneCustomer(Musteri Customer);

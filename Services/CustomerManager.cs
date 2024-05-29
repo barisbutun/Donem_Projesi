@@ -27,62 +27,77 @@ namespace Services
             _mapper = mapper;
         }   
 
-        public Musteri CreateOneCustomer(Musteri customer)
+        public async Task<CustomerDto> CreateOneCustomerAsync(Musteri customer)
         {
             _manager.Musteri.CreateOneCustomer(customer);
-            _manager.Save();
-            return customer;
+            await _manager.SaveAsync();
+            return _mapper.Map<CustomerDto>(customer);
 
         }
 
-        public void DeleteOneCustomer(int id,bool trackChanges)
+        public async Task DeleteOneCustomerAsync(int id,bool trackChanges)
         {
-            var entity = _manager.Musteri.GetOneCustomerById(id, trackChanges);
-            if(entity == null)
-            {
-                throw new CustomerNotFoundException(id);
+            var entity = await _manager.Musteri.GetOneCustomerByIdAsync(id, trackChanges);
+            
 
-            }
             _manager.Musteri.DeleteOneCustomer(entity);
-            _manager.Save();
+            _manager.SaveAsync();
 
         }
 
-        public IEnumerable<Musteri> GetAllCustomer(bool trackChanges)
+        public async Task<IEnumerable<Musteri>> GetAllCustomerAsync(bool trackChanges)
         {
-           return _manager.Musteri.GetAllCustomer(trackChanges);
+           var entity=await _manager.Musteri.GetAllCustomerAsync(trackChanges);
+            return entity;
+        }
+
+        public async Task<CustomerDto> GetOneCustomerByIdAsync(int id, bool trackChanges)
+        {
+            var customer=await _manager.Musteri.GetOneCustomerByIdAsync(id, trackChanges);  
+          
+            return _mapper.Map<CustomerDto>(customer);
+
+        }
+       
+
+
+
+        public async Task UpdateOneCustomerAsync(int id, CustomerDtoForUpdate customerDto, bool trackChanges)
+        {
+            var entity = await _manager.Musteri.GetOneCustomerByIdAsync(id, trackChanges);
+
+            entity = _mapper.Map<Musteri>(customerDto);
+             _manager.Musteri.UpdateOneCustomer(entity);
+             _manager.SaveAsync();
 
         }
 
-        public Musteri GetOneCustomerById(int id, bool trackChanges)
+        
+        private async Task<Musteri> GetOneProductByIdAndCheckExist(int id, bool trackChanges)
         {
-            var Customer=_manager.Musteri.GetOneCustomerById(id,trackChanges);  
-            if(Customer == null)
+
+            var entity = await _manager.Musteri.GetOneCustomerByIdAsync(id, trackChanges);
+            if (entity == null)
             {
                 throw new CustomerNotFoundException(id);
-                
-
             }
-            return Customer;
+            return entity;
 
         }
 
-        public void UpdateOneCustomer(int id, CustomerDtoForUpdate customerDto, bool trackChanges)
+       public async Task<(CustomerDtoForUpdate CustomerDtoForUpdate, Musteri musteri)> GetOneCustomerForPatchAsync(int id, bool trackChanges)
         {
-            var entity = _manager.Musteri.GetOneCustomerById(id, trackChanges);
-
-            if(entity == null)
-            {
-                throw new CustomerNotFoundException(id);
-
-            }
-
-            entity=_mapper.Map<Musteri>(customerDto);
-            _manager.Musteri.Update(entity);
-            _manager.Save();    
+            var customer =await GetOneProductByIdAndCheckExist(id, trackChanges);
+            var customerDtoForUpdate=_mapper.Map<CustomerDtoForUpdate>(customer);
+            return(customerDtoForUpdate, customer); 
 
 
+        }
 
+      public  async Task SaveChangesForPatchAsync(CustomerDtoForUpdate CustomerDtoForUpdate, Musteri musteri)
+        {
+           _mapper.Map(CustomerDtoForUpdate, musteri);
+            await _manager.SaveAsync();
         }
     }
 }

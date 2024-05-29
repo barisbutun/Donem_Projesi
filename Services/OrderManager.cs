@@ -28,7 +28,7 @@ namespace Services
         public Siparis CreateOneOrder(Siparis order)
         {
             _manager.Siparis.CreateOneOrder(order);
-            _manager.Save();
+            _manager.SaveAsync();
             return order;
         }
 
@@ -40,7 +40,7 @@ namespace Services
                 throw new OrderNotFoundException(id);
             }
             _manager.Siparis.DeleteOneOrder(entity);
-            _manager.Save();
+            _manager.SaveAsync();
         }
 
        
@@ -72,7 +72,7 @@ namespace Services
 
             entity = _mapper.Map<Siparis>(orderDto);
             _manager.Siparis.UpdateOneOrder(entity);
-            _manager.Save();
+            _manager.SaveAsync();
         }
     }
 }

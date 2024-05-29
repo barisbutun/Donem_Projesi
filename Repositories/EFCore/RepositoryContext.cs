@@ -26,7 +26,7 @@ namespace Repositories
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<İade>().HasKey(i => i.iade_id);
-            modelBuilder.Entity<Urunler>().HasKey(u => u.UrunId);
+            modelBuilder.Entity<Urunler>().HasKey(u => u.UrunID);
             modelBuilder.Entity<Musteri>().HasKey(m => m.Id);
             modelBuilder.Entity<Sepet>().HasKey(s => s.SepetId);
             modelBuilder.Entity<Siparis>().HasKey(s => s.SiparisID);

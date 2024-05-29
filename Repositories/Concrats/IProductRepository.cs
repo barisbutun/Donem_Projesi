@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities.Model;
+using Entities.RequestFeatures;
 
 namespace Repositories.Concrats
 {
     public interface IProductRepository:IRepositoryBase<Urunler>
     {
-        IQueryable<Urunler> GetAllProduct(bool trackChanges);
-        Urunler GetOneProductById(int id, bool trackChanges);
+        Task<PagedList<Urunler>> GetAllProductAsync(ProductParameters productParameters,bool trackChanges);
+        Task<Urunler> GetOneProductByIdAsync(int id, bool trackChanges);
 
         void CreateOneProduct(Urunler Product);
         void UpdateOneProduct(Urunler Product);
         void DeleteOneProduct(Urunler Product);
-
+        
     }
 }

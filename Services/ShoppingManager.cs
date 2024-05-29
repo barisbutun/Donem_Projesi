@@ -28,7 +28,7 @@ namespace Services
         public Sepet CreateOneShopping(Sepet shopping)
         {
             _manager.Sepet.CreateOneShopping(shopping);
-            _manager.Save();
+            _manager.SaveAsync();
             return shopping;
         }
 
@@ -40,7 +40,7 @@ namespace Services
                 throw new ShoppingNotFoundException(id);
             }
             _manager.Sepet.DeleteOneShopping(entity);
-            _manager.Save();
+            _manager.SaveAsync();
         }
 
         public IEnumerable<Sepet> GetAllShopping(bool trackChanges)
@@ -69,7 +69,7 @@ namespace Services
 
             entity = _mapper.Map<Sepet>(shoppingDto);
             _manager.Sepet.UpdateOneShopping(entity);
-            _manager.Save();
+            _manager.SaveAsync();
         }
     }
 }

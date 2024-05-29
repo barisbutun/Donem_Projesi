@@ -13,6 +13,8 @@ namespace Entities.DataTransferObject
 
         public string Parca_Adi { get; set; }
 
+        public int Price { get; set; }  
+
         public string Marka_Adi { get; set; }
 
         public int Adet_Sayisi { get; set; }

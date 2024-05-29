@@ -10,20 +10,20 @@ namespace Donem_Projesi.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "sifre",
-                table: "musteri",
-                type: "nvarchar(max)",
+            migrationBuilder.AddColumn<int>(
+                name: "UrunID",
+                table: "Siparisler",
+                type: "int",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: 0);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "sifre",
-                table: "musteri");
+                name: "UrunID",
+                table: "Siparisler");
         }
     }
 }

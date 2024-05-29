@@ -8,9 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Utilities\Formatters\**" />
+    <Content Remove="Utilities\Formatters\**" />
+    <EmbeddedResource Remove="Utilities\Formatters\**" />
+    <None Remove="Utilities\Formatters\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Extensions\IMvcBuilderExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="8.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
       <PrivateAssets>all</PrivateAssets>

@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace Entities.DataTransferObject
 {
-    public class ReturnDtoForUpdate(Urunler urun_iade, Siparis Siparis_iade, int UrunId_iade, int BolgeID_iade, int siparis_iade)
+    public class ReturnDtoForUpdate
     {
-        public Urunler urun_iade { get; set; }
-        public Siparis Siparis_iade { get; set; }
-
-        public int UrunId_iade { get; set; }
         public int BolgeID_iade { get; set; }
 
         public int siparis_iade { get; set; }
@@ -20,6 +16,8 @@ namespace Entities.DataTransferObject
 
 
         public int iade_id { get; set; }
+
+
 
     }
 }

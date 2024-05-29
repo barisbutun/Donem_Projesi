@@ -2,6 +2,8 @@
 using Entities.DataTransferObject;
 using Entities.Exceptions;
 using Entities.Model;
+using Entities.RequestFeatures;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositories.Concrats;
 using Services.Concrat;
 using System;
@@ -12,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-   public class ProductManager:IProductService
+    public class ProductManager : IProductService
     {
         private readonly IRepositoryManager _manager;
         private readonly ILoggerService _logger;
@@ -25,55 +27,84 @@ namespace Services
             _mapper = mapper;
         }
 
-        public Urunler CreateOneProduct(Urunler product)
+        public async Task<ProductDto> CreateOneProductAsync(Urunler product)
         {
             _manager.Urunler.CreateOneProduct(product);
-            _manager.Save();
-            return product;
+            await _manager.SaveAsync();
+            return _mapper.Map<ProductDto>(product);
         }
 
-        public void DeleteOneProduct(int id, bool trackChanges)
+        public async Task DeleteOneProductAsync(int id, bool trackChanges)
         {
-            var entity = _manager.Urunler.GetOneProductById(id, trackChanges);
-            if (entity == null)
-            {
-                throw new ProductNotFoundException(id);
-            }
+            var entity = await GetOneProductByIdAndCheckExist(id, trackChanges);
+
             _manager.Urunler.DeleteOneProduct(entity);
-            _manager.Save();
+            await _manager.SaveAsync();
         }
 
-        public IEnumerable<Urunler> GetAllProduct(bool trackChanges)
+        public async Task<(IEnumerable<ProductDto> product, MetaData metaData)> GetAllProductAsync(ProductParameters productParameters, bool trackChanges)
         {
-            return _manager.Urunler.GetAllProduct(trackChanges);
-        }
-
-        public Urunler GetOneProductbyId(int id, bool trackChanges)
-        {
-            var product = _manager.Urunler.GetOneProductById(id, trackChanges);
-            if (product == null)
+            if (!productParameters.ValidPriceRange)
             {
-                throw new ProductNotFoundException(id);
+
+                throw new PriceOutofRangeBadRequestException();
             }
-            return product;
+
+            var productWithMetaData = await _manager.Urunler.GetAllProductAsync(productParameters, trackChanges);
+            var productDto =  _mapper.Map<IEnumerable<ProductDto>>(productWithMetaData);
+            return (productDto, productWithMetaData.metaData);
+
         }
 
-        
-
-        public void UpdateOneProduct(int id, ProductDtoForUpdate productDto, bool trackChanges)
+        public async Task<ProductDto> GetOneProductbyIdAsync(int id, bool trackChanges)
         {
-            var entity = _manager.Urunler.GetOneProductById(id, trackChanges);
+            var product = await GetOneProductByIdAndCheckExist(id, trackChanges);
+            return _mapper.Map<ProductDto>(product);
+        }
 
-            if (entity == null)
-            {
-                throw new ProductNotFoundException(id);
-            }
+       
+
+        public async Task UpdateOneProductAsync(int id, ProductDtoForUpdate productDto, bool trackChanges)
+        {
+            var entity = await _manager.Urunler.GetOneProductByIdAsync(id, trackChanges);
+
 
             entity = _mapper.Map<Urunler>(productDto);
             _manager.Urunler.UpdateOneProduct(entity);
-            _manager.Save();
+            await _manager.SaveAsync();
         }
-    
-       
+        public async Task<(ProductDtoForUpdate productDtoForUpdate, Urunler urun)> GetOneProductForPatchAsync(int id, bool trackChanges)
+        {
+            var product = await GetOneProductByIdAndCheckExist(id, trackChanges);
+            var productDtoForUpdate = _mapper.Map<ProductDtoForUpdate>(product);
+            return (productDtoForUpdate, product);
+
+        }
+
+        public async Task SaveChangesForPatchAsync(ProductDtoForUpdate productDtoForUpdate, Urunler urun)
+        {
+            _mapper.Map(productDtoForUpdate, urun);
+            await _manager.SaveAsync();
+
+        }
+
+
+
+
+
+        private async Task<Urunler> GetOneProductByIdAndCheckExist(int id, bool trackChanges)
+        {
+
+            var entity = await _manager.Urunler.GetOneProductByIdAsync(id, trackChanges);
+            if (entity == null)
+            {
+                throw new ProductNotFoundException(id);
+            }
+            return entity;
+
+        }
+
     }
+
 }
+

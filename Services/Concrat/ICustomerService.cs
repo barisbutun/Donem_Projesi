@@ -10,12 +10,15 @@ namespace Services.Concrat
 {
     public interface ICustomerService
     {
-        IEnumerable<Musteri> GetAllCustomer(bool trackChanges);
-        Musteri GetOneCustomerById(int id, bool trackChanges);
-        Musteri CreateOneCustomer(Musteri customer);
-        void UpdateOneCustomer(int id, CustomerDtoForUpdate customerDto, bool trackChanges);
-        void DeleteOneCustomer(int id,bool trackChanges);
+        Task<IEnumerable<Musteri>> GetAllCustomerAsync(bool trackChanges);
+        Task<CustomerDto> GetOneCustomerByIdAsync(int id, bool trackChanges);
+        Task<CustomerDto> CreateOneCustomerAsync(Musteri customer);
+        Task UpdateOneCustomerAsync(int id, CustomerDtoForUpdate customerDto, bool trackChanges);
+        Task DeleteOneCustomerAsync(int id,bool trackChanges);
+        Task<(CustomerDtoForUpdate CustomerDtoForUpdate, Musteri musteri)> GetOneCustomerForPatchAsync(int id, bool trackChanges);
 
+
+        Task SaveChangesForPatchAsync(CustomerDtoForUpdate CustomerDtoForUpdate, Musteri musteri);
 
     }
 }

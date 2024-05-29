@@ -192,7 +192,7 @@ function KayitForm({ onShowLogin }) {
         <label htmlFor="isim">Adı:</label>
         <input
           type="text"
-          id="isim"
+          id="Ad"
           name="name"
           value={formData.name}
           onChange={handleChange}
@@ -205,7 +205,7 @@ function KayitForm({ onShowLogin }) {
         <label htmlFor="soyisim">Soyadı:</label>
         <input
           type="text"
-          id="soyisim"
+          id="Soyad"
           name="surname"
           value={formData.surname}
           onChange={handleChange}
@@ -218,7 +218,7 @@ function KayitForm({ onShowLogin }) {
         <label htmlFor="email">Email:</label>
         <input
           type="email"
-          id="email"
+          id="Email"
           name="email"
           value={formData.email}
           onChange={handleChange}
@@ -242,7 +242,7 @@ function KayitForm({ onShowLogin }) {
         <label htmlFor="telefon">Telefon Numarası:</label>
         <input
           type="text"
-          id="telefon"
+          id="Phone"
           name="telefon"
           value={formData.telefon}
           onChange={handleChange}

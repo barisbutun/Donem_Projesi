@@ -2,26 +2,14 @@
 {
     public class Sepet
     {
-        Urunler Urunler { get; set; }
+       
         public int SepetId { get; set; }
 
-        public int UrunID { get; set; }
+        public int UrunId { get; set; }
 
         public int BolgeId { get; set; }
 
-        public Sepet(int SepetId)
-        {
-            UrunID = Urunler.UrunId;
-            this.SepetId = SepetId;
-            BolgeId = Urunler.BolgeID;
-
-        }
-
         
-
-
         
-
-
     }
 }

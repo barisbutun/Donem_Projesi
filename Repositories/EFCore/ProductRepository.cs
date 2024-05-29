@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities.Model;
+using Entities.RequestFeatures;
+using Microsoft.EntityFrameworkCore;
 using Repositories.Concrats;
+using Repositories.EFCore.Extensions;
 
 namespace Repositories.EFCore
 {
@@ -14,26 +17,31 @@ namespace Repositories.EFCore
         {
 
         }
-        public void CreateOneProduct(Urunler Product)
+
+        public void CreateOneProduct(Urunler Product) => Create(Product);
+        public void DeleteOneProduct(Urunler Product)=> Delete(Product);    
+
+
+        public async Task<PagedList<Urunler>> GetAllProductAsync(ProductParameters productParameters, bool trackChanges)
         {
-           Create(Product);
+            var query = FindAll(trackChanges).FilterProducts(productParameters.MinPrice, productParameters.MaxPrice)
+          .Search(productParameters.SearchTerm)
+          .OrderBy(b => b.UrunID)
+          .Sort(productParameters.OrderBy)
+          .AsQueryable();
+
+            var count = await query.CountAsync();
+
+            var products = await query
+          .ApplyPagination(productParameters.PageNumber, productParameters.PageSize)
+                .ToListAsync();
+
+            return new PagedList<Urunler>(products,count, productParameters.PageNumber, productParameters.PageSize);
         }
 
-        public void DeleteOneProduct(Urunler Product)
-        {
-            Delete(Product);    
-        }
-
-        public IQueryable<Urunler> GetAllProduct(bool trackChanges)
-        {
-            return FindAll(trackChanges)
-                .OrderBy(b => b.UrunId);
-        }
-
-        public Urunler GetOneProductById(int id, bool trackChanges)=>
-        FindByCondition(b => b.UrunId.Equals(id), trackChanges).SingleOrDefault();
+        public async Task<Urunler> GetOneProductByIdAsync(int UrunId, bool trackChanges) =>
+           await FindByCondition(b => b.UrunID.Equals(UrunId), trackChanges).SingleOrDefaultAsync();
 
         public void UpdateOneProduct(Urunler Product)=>Update(Product);
-        
     }
 }
