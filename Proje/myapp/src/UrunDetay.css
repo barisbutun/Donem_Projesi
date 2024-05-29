@@ -1,51 +1,99 @@
 /* Genel Stil */
+.urun-detay-container {
+  display: flex;
+  justify-content: center; /* İçeriği yatayda ortala */
+  align-items: center; /* İçeriği dikeyde ortala */
+  height: 100vh; /* Tam sayfa yüksekliği */
+  background-color: rgba(7, 7, 7, 0.358); /* Arka plan rengi */
+
+}
+
 .urun-detay {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .urun-detay h2 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .urun-detay img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 20px;
-  }
-  
-  .urun-detay p {
-    line-height: 1.6;
-    margin-bottom: 15px;
-  }
-  
-  .urun-detay button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .urun-detay button:hover {
-    opacity: 0.8;
-  }
-  
-  /* Mobil Cihazlar için Duyarlılık */
-  @media (max-width: 768px) {
-    .urun-detay {
-      padding: 10px;
-    }
-  
-    .urun-detay img {
-      height: 300px; /* Örnek: Mobil cihazlarda görsel yüksekliğini ayarlayın */
-    }
-  }
-  
+  display: flex; /* Yatay düzen */
+  align-items: center; /* İçerikleri dikeyde ortala */
+  justify-content: center; /* İçerikleri yatayda ortala */
+  border: 1px solid #ccc;
+  padding: 15px;
+  background-color: white;
+  width: 700px; /* Sabit genişlik */
+  height: 500px; /* Sabit yükseklik */
+  margin: 20px auto;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti */
+  position: relative; /* Düğmelerin doğru konumlanması için */
+}
+
+
+.urun-detay-sol {
+  flex: 1; /* Sol tarafı esnek yap */
+  display: flex; /* Sol taraf için flexbox */
+  justify-content: center; /* Resmi ortala */
+}
+
+.urun-detay-sag {
+  flex: 1; /* Sağ tarafı esnek yap */
+  display: flex; /* Sağ taraf için flexbox */
+  flex-direction: column; /* Sütun düzeni */
+  padding-left: 20px; /* Sağ taraf boşluk */
+}
+
+.urun-detay h2 {
+  margin: 0;
+  font-size: 25px; /* Başlık yazı tipi boyutunu ayarla */
+  color: black;
+  margin-bottom: 20px;
+}
+
+.urun-detay img {
+  width: 100%; /* Resmin genişliğini ayarla */
+  height: auto; /* Resmin orantılı yükseklikte görüntülenmesini sağla */
+  object-fit: cover;
+  border-radius: 10px; /* Resmin kenarlarını yuvarla */
+}
+
+.urun-detay p {
+  margin: 0;
+  margin-bottom: 10px;
+  text-align: left;
+  font-size: 18px; /* Metin yazı tipi boyutunu ayarla */
+}
+
+.urun-detay button {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: rgb(51, 51, 54);
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 16px; /* Düğme yazı tipi boyutunu ayarla */
+}
+
+.urun-detay button:hover {
+  opacity: 0.8;
+}
+
+.prev-button, .next-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.prev-button {
+  left: 10px;
+}
+
+.next-button {
+  right: 10px;
+}
+
+.prev-button:disabled, .next-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

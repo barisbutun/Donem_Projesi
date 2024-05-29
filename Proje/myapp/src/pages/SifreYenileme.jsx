@@ -8,7 +8,7 @@ const SifreYenileme = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        try {
+        try { 
             const response = await fetch('/api/sifreyenileme', {
                 method: 'POST',
                 headers: {

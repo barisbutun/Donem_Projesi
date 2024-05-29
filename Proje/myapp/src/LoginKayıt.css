@@ -27,7 +27,7 @@
     align-items: center;
     position: relative;
     backdrop-filter: blur(5px);
-    border-image: fill 0 linear-gradient( #00000021,rgba(0, 0, 0, 0.332));
+    border-image: fill 0 linear-gradient( #00000027,rgba(0, 0, 0, 0.074));
     mix-blend-mode: multiply;
   }
 
@@ -131,9 +131,9 @@
   }
 
   .buttonKayit:hover {
-    background-color: rgba(70, 69, 69, 0.716);
+    background-color: rgba(28, 27, 27, 0.716);
   }
 
   .buttonGiris:hover {
-    background-color: rgba(70, 69, 69, 0.716);
+    background-color: rgba(28, 27, 27, 0.716);
   }
