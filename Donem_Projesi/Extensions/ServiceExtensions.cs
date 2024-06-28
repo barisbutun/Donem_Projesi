@@ -34,6 +34,7 @@ namespace Donem_Projesi.Extensions
             services.AddSingleton<LogFilterAttribute>();
 
         }
+        public static void ConfigureImageFile(this IServiceCollection services) => services.AddTransient<IFileService, FileService>();
 
         public static void ConfigureCors(this IServiceCollection services)
         {

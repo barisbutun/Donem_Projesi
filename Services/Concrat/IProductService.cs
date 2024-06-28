@@ -12,9 +12,9 @@ namespace Services.Concrat
     public interface IProductService
     {
         Task<(IEnumerable<ProductDto> product, MetaData metaData)> GetAllProductAsync(ProductParameters productParameters, bool trackchanges);
-        Task<ProductDto> GetOneProductbyIdAsync(int id, bool trackchanges);
-        Task<ProductDto> CreateOneProductAsync(Urunler product);
-
+        Task<ProductDtoForUpdate> GetOneProductbyIdAsync(int id, bool trackchanges);
+        Task<ProductDto> CreateOneProductAsync(ProductDto product);
+        Task<IEnumerable<Urunler>> GetAllProductAsync1(bool trackChanges);
 
         Task UpdateOneProductAsync(int id, ProductDtoForUpdate productDto, bool trackchanges);
         Task DeleteOneProductAsync(int id, bool trackChanges);

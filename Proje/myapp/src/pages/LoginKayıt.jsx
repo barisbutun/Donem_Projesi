@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'; 
 import '../LoginKayıt.css';
 import '../Anasayfa.css';
-import { Link } from 'react-router-dom'; 
 import logo from '../logolar/homelogo.png';
 
 function LoginKayit() {
@@ -23,25 +23,14 @@ function LoginKayit() {
   const toggleCategories = () => {
     setShowCategories(!showCategories); // Kategorilerin görünürlüğünü değiştir
   };
+
   return (
     <div className="login-kayit">
       <header className="App-header">
         <nav className="header-nav">
-<<<<<<< HEAD
           <ul className="categories">
             <li><Link to="/kategoriler/elektronik">Elektronik</Link></li>
             {/* Other categories go here */}
-=======
-          <button className="menu-toggle" onClick={toggleCategories}>
-            ☰
-          </button>
-          <ul className={`categories ${showCategories ? 'show' : ''}`}>
-            {categories.map((category) => (
-              <li key={category.id}>
-                <Link to={category.path}>{category.name}</Link>
-              </li>
-            ))}
->>>>>>> b004d7b3900e84ae7ddb7e5ffd4e3a02b3b3e28e
           </ul>
         </nav>
         <div className='Arama'>
@@ -93,6 +82,7 @@ function LoginForm({ onLogin }) {
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
+      
     }));
   };
 
@@ -104,7 +94,41 @@ function LoginForm({ onLogin }) {
       return;
     }
 
-    onLogin(formData);
+    const url = new URL('https://localhost:7242/api/Customer/Authenticate');
+    url.search = new URLSearchParams({
+      Email: formData.email,
+      Password: formData.sifre
+    }).toString();
+
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } 
+         else {
+          return response.json().then((error) => {
+            throw new Error('Network response was not ok: ' + error.message);
+          });
+        }
+      })
+      .then((responseData) => {
+        console.log('Sunucudan gelen yanıt:', responseData);
+        if (responseData.status==200) {
+          alert('Giriş başarılı!');
+          onLogin(formData); // Login işlemlerini buraya ekleyebilirsiniz
+        } else {
+          alert('Giriş başarısız: ' + responseData.error);
+        }
+      })
+      .catch((error) => {
+        console.error('There was a problem with the fetch operation:', error);
+        alert('Giriş sırasında bir hata oluştu. Hata mesajı: ' + error.message);
+      });
   };
 
   return (
@@ -146,6 +170,7 @@ function KayitForm({ onShowLogin }) {
     telefon: '',
   });
   const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate(); // useNavigate hook'unu kullanıyoruz
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -157,7 +182,7 @@ function KayitForm({ onShowLogin }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     if (
       formData.name === '' ||
       formData.surname === '' ||
@@ -168,13 +193,12 @@ function KayitForm({ onShowLogin }) {
       alert('Tüm alanları doldurmanız gerekmektedir.');
       return;
     }
-
+  
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      alert('Geçerli bir e-posta girmeniz gerekmektedir.');
+      alert('Geçerli bir e-posta girmenizgerekmektedir.');
       return;
     }
-
-<<<<<<< HEAD
+  
     const data = {
       Ad: formData.name,
       Soyad: formData.surname,
@@ -182,7 +206,7 @@ function KayitForm({ onShowLogin }) {
       sifre: formData.sifre,
       telefon: formData.telefon,
     };
-
+  
     fetch('https://localhost:7242/api/Customer', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -191,24 +215,20 @@ function KayitForm({ onShowLogin }) {
       }
     })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok: ' + response.statusText);
+        if (response.status === 200 || response.status === 201) {
+          return response.json();
+        } else {
+          return response.json().then((error) => {
+            throw new Error('Network response was not ok: ' + error.message);
+          });
         }
-        return response.json();
       })
       .then((responseData) => {
         if (responseData.success) {
           alert('Kayıt işlemi başarıyla tamamlandı!');
-          onShowLogin(); // Giriş formuna geçiş
+          navigate('/LoginKayıt'); // Kullanıcıyı giriş sayfasına yönlendir
         } else {
           setErrorMessage(responseData.error);
-=======
-      fetch('https://localhost:7242/api/Customer', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json',
->>>>>>> b004d7b3900e84ae7ddb7e5ffd4e3a02b3b3e28e
         }
       })
       .catch((error) => {
@@ -216,7 +236,7 @@ function KayitForm({ onShowLogin }) {
         setErrorMessage('Kayıt işlemi sırasında bir hata oluştu. Hata mesajı: ' + error.message);
       });
   };
-
+  
   return (
     <form onSubmit={handleSubmit}>
       <div className="isim">
@@ -257,7 +277,8 @@ function KayitForm({ onShowLogin }) {
           required
         />
       </div>
-      <div className="sifre">
+      
+      <div className="password">
         <label htmlFor="sifre">Şifre:</label>
         <input
           type="password"
@@ -269,11 +290,12 @@ function KayitForm({ onShowLogin }) {
           required
         />
       </div>
+      
       <div className="telefon">
-        <label htmlFor="telefon">Telefon Numarası:</label>
+        <label htmlFor="telefon">Telefon:</label>
         <input
           type="text"
-          id="Phone"
+          id="telefon"
           name="telefon"
           value={formData.telefon}
           onChange={handleChange}
@@ -281,12 +303,15 @@ function KayitForm({ onShowLogin }) {
           required
         />
       </div>
-      {errorMessage && <p className="hata-mesajı">{errorMessage}</p>}
-      <button type="submit" className="buttonKayit">
-        Kaydol
+      
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      
+      <button className="buttonKayit" type="submit">
+        Kayıt Ol
       </button>
     </form>
   );
 }
 
 export default LoginKayit;
+

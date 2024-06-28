@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Presentation.ActionFilters;
+using System.ComponentModel.DataAnnotations;
 
 namespace Presentation.Controller
 {
@@ -63,7 +64,7 @@ namespace Presentation.Controller
 
         public async Task<IActionResult> UpdateOneCustomer([FromRoute(Name="id")] int id, [FromBody] CustomerDtoForUpdate customerDto)
         {
-
+ 
             if(customerDto is null)
             {
                 return BadRequest();
@@ -71,13 +72,44 @@ namespace Presentation.Controller
             }
            await _manager.CustomerService.UpdateOneCustomerAsync(id, customerDto, true);
             return NoContent();
-
+            
 
         }
+
+        [HttpGet("Authenticate")]
+        public async Task<IActionResult> Authentication([FromQuery] string Email, [FromQuery] string Password)
+        {
+            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
+            {
+                return BadRequest("Email or password cannot be empty");
+            }
+
+            var Customer = await _manager.CustomerService.GetAllCustomerAsync(false);
+
+            var authenticatedCustomer = Customer.FirstOrDefault(x => x.Email == Email && x.sifre == Password);
+
+            if (authenticatedCustomer != null)
+            {
+                // Doğrulama başarılı, istemciye müşteri bilgilerini döndür.
+                return Ok(authenticatedCustomer);
+            }
+
+            // Eğer hiçbir müşteri bulunamazsa veya doğrulama başarısızsa NotFound döndür.
+            return NotFound("Customer not found or authentication failed");
+        }
+
+
+
+
+
+
+
+
+
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetOneCustomer([FromRoute(Name = "id")] int id)
         {
-            var  oneCustomer = _manager.CustomerService.GetOneCustomerByIdAsync(id, false);
+            var  oneCustomer =await _manager.CustomerService.GetOneCustomerByIdAsync(id, false);
 
             if(oneCustomer is null)
             {
@@ -92,12 +124,20 @@ namespace Presentation.Controller
         }
 
         [HttpDelete("{id:int}")]
-        public IActionResult DeleteOneCustommer([FromRoute(Name = "id")] int id)
+        public async Task DeleteOneCustomerAsync(int id, bool trackChanges)
         {
-            _manager.CustomerService.DeleteOneCustomerAsync(id, false);
-            return NoContent();
-        }
+            var entity = await _manager.CustomerService.GetOneCustomerByIdAsync(id, trackChanges);
 
+            if (entity == null)
+            {
+                // Müşteri bulunamadı, işlemi iptal et veya istisna fırlat
+                throw new Exception("Customer not found");
+            }
+
+           await  _manager.CustomerService.DeleteOneCustomerAsync(id,false);
+            NoContent();
+
+        }
 
         [HttpPatch("{id:int}")]
 
@@ -119,7 +159,7 @@ namespace Presentation.Controller
             if (!ModelState.IsValid)
                 return UnprocessableEntity(ModelState);
 
-            _manager.CustomerService.SaveChangesForPatchAsync(result.CustomerDtoForUpdate, result.musteri);
+            await _manager.CustomerService.SaveChangesForPatchAsync(result.CustomerDtoForUpdate, result.musteri);
 
 
 

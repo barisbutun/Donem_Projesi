@@ -1,4 +1,4 @@
-/* Genel Stil */
+* Genel Stil */
 
 .urunSayfasi {
     display: flex; /* Ürünleri yatay olarak sıralayın */
@@ -53,59 +53,3 @@
     border-radius: 5px; /* Seçici köşelerini yuvarlatın */
     font-size: 16px; /* Seçici metninin boyutunu ayarlayın */
   }
-  
-/* Filtreleme kısmı */
-.filtreleme {
-  display: flex;
-  flex-direction: column; /* Dikey düzen */
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px;
-  border-radius: 10px;
-  position: absolute;
-  top: 50px; /* Sayfanın üstünden 50px aşağıda başlat */
-  right: 20px; /* Sağdan 20px içeri */
-  z-index: 1000; /* Diğer öğelerin üzerinde olmasını sağla */
-  transition: max-height 0.3s ease; /* Açılış ve kapanış animasyonu */
-  max-height: 0; /* Başlangıçta kapalı */
-  overflow: hidden; /* Fazla içeriği gizle */
-}
-
-.filtreleme label {
-  margin: 5px 0; /* Etiketler arasında boşluk bırak */
-}
-
-.filtreleme input {
-  padding: 5px;
-  margin-left: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.filtreleme button {
-  padding: 5px 10px;
-  margin-top: 10px; /* Düğmeyi yukarıya taşı */
-  cursor: pointer;
-  background-color:rgb(51, 51, 54);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.filtreleme button:hover {
-  background-color: rgba(70, 69, 69, 0.716);
-}
-
-.filtreleme-toggle {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  cursor: pointer;
-}
-.filtreleme.open {
-  max-height: 200px; /* Açık durumda maksimum yükseklik */
-  display: flex; /* Açık durumda filtreleme alanını göster */
-}

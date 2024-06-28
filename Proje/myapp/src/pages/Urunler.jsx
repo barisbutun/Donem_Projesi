@@ -15,7 +15,7 @@ const Urunler = () => {
   useEffect(() => {
     const fetchUrunler = async () => {
       try {
-        const response = await fetch('/api/urunler'); // API URL'sini doğru şekilde güncelleyin
+        const response = await fetch('https://localhost:7242/api/product/All_Prodcut'); // API URL'sini doğru şekilde güncelleyin
         if (!response.ok) {
           throw new Error('Veriler alınamadı');
         }
@@ -24,7 +24,7 @@ const Urunler = () => {
         // Resimleri ekleyin
         const urunlerWithImages = data.map((urun) => ({
           ...urun,
-          resim: images[`${urun.imageFileName}`], // Resim dosya adını kullanarak resim yolu ekleyin
+          resim: images[urun.ProductImage], // UrunId kullanarak resim yolu ekleyin
         }));
 
         setUrunlerDizisi(urunlerWithImages);
@@ -68,38 +68,12 @@ const Urunler = () => {
 
   return (
     <section className="urunSayfasi">
-      <div className="filtreleme-toggle" onClick={() => setShowFilter(!showFilter)}>
-        {showFilter ? 'Filtreyi Gizle' : 'Filtrele'}
-      </div>
-      
-      {showFilter && (
-        <div className="filtreleme">
-          <label>
-            Min Fiyat:
-            <input
-              type="number"
-              value={minPrice}
-              onChange={(e) => setMinPrice(e.target.value)}
-            />
-          </label>
-          <label>
-            Max Fiyat:
-            <input
-              type="number"
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
-            />
-          </label>
-          <button onClick={handleFilter}>Filtrele</button>
-        </div>
-      )}
-
       <div className='urunGrid'>
         {gorunenUrunler.length === 0 ? (
           <p>Yükleniyor...</p>
         ) : (
           gorunenUrunler.map((urun) => (
-            <Urunkartı key={urun.UrunId} urun={urun} />
+            <Urunkartı key={urun.urunID} urun={urun} />
           ))
         )}
       </div>
@@ -113,11 +87,9 @@ const Urunler = () => {
 
         <div className="resimSayisiKontrol">
           <select value={resimSayisi} onChange={(e) => handleResimSayisiDegistir(parseInt(e.target.value))}>
+            <option value={5}>5</option>
             <option value={10}>10</option>
             <option value={20}>20</option>
-            <option value={30}>30</option>
-            <option value={40}>40</option>
-            <option value={50}>50</option>
           </select>
         </div>
       </footer>
@@ -126,36 +98,3 @@ const Urunler = () => {
 };
 
 export default Urunler;
-
-
-
-
-// import React from 'react';
-// import Urunkartı from './Urunkartı';
-// import Arka_Kapı_Gergisi from '../Urunler/Arka_Kapı_Gergisi.png';
-// import On_Panel from '../Urunler/On_Panel.png';
-// import Yag_Filtresi from '../Urunler/Yag_Filtresi.png';
-// import Sis_Farı_Lambası from '../Urunler/Sis_Farı_Lambası.png';
-// import '../Urunler.css';
-
-// const urunler = [
-//   { urunId: 1, urunAdı: 'Arka Kapı Gergisi', resim: Arka_Kapı_Gergisi, Fiyat: 200, Acıklama: 'Arka kapı için gergi.' },
-//   { urunId: 2, urunAdı: 'Ön Panel', resim: On_Panel, Fiyat: 500, Acıklama: 'Ön panel için açıklama.' },
-//   { urunId: 3, urunAdı: 'Yağ Filtresi', resim: Yag_Filtresi, Fiyat: 800, Acıklama: 'Yağ filtresi açıklaması.' },
-//   { urunId: 4, urunAdı: 'Sis Farı Lambası', resim: Sis_Farı_Lambası, Fiyat: 400, Acıklama: 'Sis farı lambası açıklaması.' },
-// ];
-
-// const Urunler = () => {
-//   return (
-//     <div className="urunler-sayfasi">
-//       <h2>Ürünler</h2>
-//       <div className="product-grid">
-//         {urunler.map((urun) => (
-//           <Urunkartı key={urun.id} urun={urun} />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Urunler;

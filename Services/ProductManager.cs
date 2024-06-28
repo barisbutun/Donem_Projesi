@@ -27,11 +27,14 @@ namespace Services
             _mapper = mapper;
         }
 
-        public async Task<ProductDto> CreateOneProductAsync(Urunler product)
+        public async Task<ProductDto> CreateOneProductAsync(ProductDto product)
         {
-            _manager.Urunler.CreateOneProduct(product);
+            var urunler=_mapper.Map<Urunler>(product);
+
+            _manager.Urunler.CreateOneProduct(urunler);
             await _manager.SaveAsync();
-            return _mapper.Map<ProductDto>(product);
+            return _mapper.Map<ProductDto>(urunler);
+          
         }
 
         public async Task DeleteOneProductAsync(int id, bool trackChanges)
@@ -56,10 +59,10 @@ namespace Services
 
         }
 
-        public async Task<ProductDto> GetOneProductbyIdAsync(int id, bool trackChanges)
+        public async Task<ProductDtoForUpdate> GetOneProductbyIdAsync(int id, bool trackChanges)
         {
             var product = await GetOneProductByIdAndCheckExist(id, trackChanges);
-            return _mapper.Map<ProductDto>(product);
+            return _mapper.Map<ProductDtoForUpdate>(product);
         }
 
        
@@ -68,8 +71,7 @@ namespace Services
         {
             var entity = await _manager.Urunler.GetOneProductByIdAsync(id, trackChanges);
 
-
-            entity = _mapper.Map<Urunler>(productDto);
+            _mapper.Map(productDto, entity);
             _manager.Urunler.UpdateOneProduct(entity);
             await _manager.SaveAsync();
         }
@@ -104,6 +106,11 @@ namespace Services
 
         }
 
+        public async Task<IEnumerable<Urunler>> GetAllProductAsync1(bool trackChanges)
+        {
+           var entity=await _manager.Urunler.GetAllCustomerAsync1(trackChanges);
+            return entity;  
+        }
     }
 
 }

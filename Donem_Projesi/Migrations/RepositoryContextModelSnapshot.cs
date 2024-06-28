@@ -83,23 +83,23 @@ namespace Donem_Projesi.Migrations
                     b.Property<int>("UrunID")
                         .HasColumnType("int");
 
-                    b.Property<int>("UrunlerUrunId")
+                    b.Property<int>("UrunlerUrunID")
                         .HasColumnType("int");
 
                     b.HasKey("SiparisID");
 
-                    b.HasIndex("UrunlerUrunId");
+                    b.HasIndex("UrunlerUrunID");
 
                     b.ToTable("Siparisler");
                 });
 
             modelBuilder.Entity("Entities.Model.Urunler", b =>
                 {
-                    b.Property<int>("UrunId")
+                    b.Property<int>("UrunID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UrunId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UrunID"));
 
                     b.Property<int>("Adet_Sayisi")
                         .HasColumnType("int");
@@ -118,7 +118,10 @@ namespace Donem_Projesi.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.HasKey("UrunId");
+                    b.Property<string>("ProductImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UrunID");
 
                     b.ToTable("Urunler");
                 });
@@ -146,7 +149,7 @@ namespace Donem_Projesi.Migrations
                 {
                     b.HasOne("Entities.Model.Urunler", "Urunler")
                         .WithMany()
-                        .HasForeignKey("UrunlerUrunId")
+                        .HasForeignKey("UrunlerUrunID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

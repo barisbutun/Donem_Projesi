@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../logolar/homelogo.png';
 import '../Anasayfa.css';
-import Arka_Kapı_Gergisi from '../Urunler/Arka_Kapı_Gergisi.png';
-import On_Panel from '../Urunler/On_Panel.png';
-import Yag_Filtresi from '../Urunler/Yag_Filtresi.png';
-import Sis_Farı_Lambası from '../Urunler/Sis_Farı_Lambası.png';
+import Arka_Kapı_Gergisi from '../Urunler/27.png';
+import On_Panel from '../Urunler/26.png';
+import Yag_Filtresi from '../Urunler/28.png';
+import Sis_Farı_Lambası from '../Urunler/37.png';
 
 const categories = [
   { bolgeId: 1, name: 'Motor' },

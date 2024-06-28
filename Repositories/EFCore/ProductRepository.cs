@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.DataTransferObject;
 using Entities.Model;
 using Entities.RequestFeatures;
 using Microsoft.EntityFrameworkCore;
@@ -39,9 +40,17 @@ namespace Repositories.EFCore
             return new PagedList<Urunler>(products,count, productParameters.PageNumber, productParameters.PageSize);
         }
 
+
+
         public async Task<Urunler> GetOneProductByIdAsync(int UrunId, bool trackChanges) =>
            await FindByCondition(b => b.UrunID.Equals(UrunId), trackChanges).SingleOrDefaultAsync();
 
         public void UpdateOneProduct(Urunler Product)=>Update(Product);
+
+        public async Task<IQueryable<Urunler>> GetAllCustomerAsync1(bool trackChanges)
+        {
+            return FindAll(trackChanges).
+                OrderBy(b => b.UrunID);
+        }
     }
 }

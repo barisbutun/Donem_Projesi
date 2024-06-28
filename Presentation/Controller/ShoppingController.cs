@@ -25,10 +25,6 @@ namespace Presentation.Controller
 
         public async Task<IActionResult> CreateOneShopping([FromBody] Sepet sepet, [FromRoute(Name ="id")] int id)
         {
-
-
-
-
             if(sepet is null)
             {
                 return BadRequest();

@@ -25,10 +25,10 @@ namespace Services
             _mapper = mapper;
         }
 
-        public Sepet CreateOneShopping(Sepet shopping)
+        public async  Task<Sepet> CreateOneShopping(Sepet shopping)
         {
-            _manager.Sepet.CreateOneShopping(shopping);
-            _manager.SaveAsync();
+             _manager.Sepet.CreateOneShopping(shopping);
+          await  _manager.SaveAsync();
             return shopping;
         }
 

@@ -10,9 +10,7 @@ namespace Presentation.ActionFilters
         {
             var controller = context.RouteData.Values["controller"];
             var action = context.RouteData.Values["action"];
-            var param = context.ActionArguments
-                .SingleOrDefault(p => p.Value != null).Value;
-
+            var param = context.ActionArguments.FirstOrDefault(p => p.Value != null).Value;
             if (param == null)
             {
                 context.Result = new BadRequestObjectResult($"Object is null. " +

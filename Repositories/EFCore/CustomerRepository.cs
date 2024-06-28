@@ -1,4 +1,5 @@
-﻿using Entities.Model;
+﻿using Entities.DataTransferObject;
+using Entities.Model;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Concrats;
 using System;

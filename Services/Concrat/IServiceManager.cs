@@ -14,6 +14,8 @@ namespace Services.Concrat
         IShoppingService ShoppingService { get; }   
         IOrderService OrderService { get; }
 
+        IFileService FileService { get; }
+
 
     }
 }

@@ -37,10 +37,14 @@
   <ItemGroup>
 	  <ProjectReference Include="..\Presentation\Presentation.csproj" />
 	  <ProjectReference Include="..\Repositories\Repositories.csproj" />
-	  
+	 
 	  <ProjectReference Include="..\Services\Services.csproj" />
 	  
     <ProjectReference Include="..\Entities\Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

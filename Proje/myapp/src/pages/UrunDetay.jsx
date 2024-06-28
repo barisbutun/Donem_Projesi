@@ -11,7 +11,7 @@ function UrunDetay() {
   useEffect(() => {
     const fetchUrun = async () => {
       try {
-        const response = await fetch(`/api/urunler/${urunId}`); // API URL'sini uygun şekilde güncelleyin
+        const response = await fetch(`https://localhost:7242/api/product/All_Prodcut/${urunId}`); // API URL'sini uygun şekilde güncelleyin
         if (!response.ok) {
           throw new Error('Ürün bulunamadı.');
         }

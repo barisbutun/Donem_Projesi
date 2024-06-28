@@ -12,7 +12,7 @@ namespace Services.Concrat
     {
         IEnumerable<Sepet> GetAllShopping(bool trackChanges);
         Sepet GetOneShoppingById(int id, bool trackChanges);
-        Sepet CreateOneShopping(Sepet shopping);
+       Task <Sepet> CreateOneShopping(Sepet shopping);
         void UpdateOneShopping(int id, ShoppingDtoForUpdate shoppingDto, bool trackChanges);
         void DeleteOneShopping(int id, bool trackChanges);
     }

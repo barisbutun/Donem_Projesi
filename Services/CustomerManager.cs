@@ -40,8 +40,8 @@ namespace Services
             var entity = await _manager.Musteri.GetOneCustomerByIdAsync(id, trackChanges);
             
 
-            _manager.Musteri.DeleteOneCustomer(entity);
-            _manager.SaveAsync();
+             _manager.Musteri.DeleteOneCustomer(entity);
+            await _manager.SaveAsync();
 
         }
 

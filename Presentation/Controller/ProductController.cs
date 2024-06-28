@@ -2,9 +2,12 @@
 using Entities.Exceptions;
 using Entities.Model;
 using Entities.RequestFeatures;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using Presentation.ActionFilters;
+using Services;
 using Services.Concrat;
 using System;
 using System.Collections.Generic;
@@ -23,28 +26,53 @@ namespace Presentation.Controller
     public class ProductController : ControllerBase
     {
         private readonly IServiceManager _manager;
-
-        public ProductController(IServiceManager manager)
+        private readonly IFileService _fileService;
+        public ProductController(IServiceManager manager,IFileService fileService)
         {
             _manager = manager;
-
+            _fileService = fileService;
 
         }
         [ServiceFilter(typeof(LogFilterAttribute))]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost]
-        public async Task<IActionResult> CreateOneProductAsync([FromBody] Urunler urunler)
+        public async Task<IActionResult> CreateOneProductAsync([FromForm] ProductDto productDtoAdd)
         {
-            if (urunler == null)
+            try
             {
-                return BadRequest("Product object is null");
+                if (productDtoAdd.ImageFile?.Length > 1 * 1024 * 1024)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest,
+                        "File size should not exceed 1 mb");
+
+                }
+                string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
+               
+                string CreatedImageName = await _fileService.SaveFileAsync(productDtoAdd.ImageFile, allowedExtensions);
+                productDtoAdd.ProductImage = CreatedImageName;
+
+                var product = await _manager.ProductService.CreateOneProductAsync(productDtoAdd);
+                return StatusCode(201, product);
+            }
+            catch (Exception ex)
+            {
+                
+                return StatusCode (StatusCodes.Status500InternalServerError,ex.Message); 
             }
 
-            var product = await _manager.ProductService.CreateOneProductAsync(urunler);
-            return StatusCode(201, product);
+           
         }
+        [HttpGet("All_Prodcut")]
+        public async Task<IActionResult> GetAllProductAsync1()
+        {
+            var Product = await _manager.ProductService.GetAllProductAsync1(false);
 
 
+
+           return Ok(Product);
+
+
+        }
 
         [HttpGet]
 
@@ -53,31 +81,93 @@ namespace Presentation.Controller
 
             var PagedResult = await _manager.ProductService.GetAllProductAsync(productParameters, false);
 
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(PagedResult.metaData));
+           // Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(PagedResult.metaData));
 
             return Ok(PagedResult.product);
         }
+
+
+        /* [HttpPut("{id:int}")]
+
+         public async Task<IActionResult> UpdateOneProductAsync([FromRoute(Name="id")] int id,
+             [FromForm] ProductDtoForUpdate productDtoUpdate)
+         {
+             if(productDtoUpdate is null)
+             {
+                 return BadRequest();
+             }
+             var existingProduct = await
+                 _manager.ProductService.GetOneProductbyIdAsync(id, true);
+             if (existingProduct is null)
+             {
+                 return StatusCode(StatusCodes.Status404NotFound,
+                     $"Product with id:{id} does not found");
+
+             }
+             string oldImage = existingProduct.ProductImage;
+             if(productDtoUpdate != null)
+             {
+                 if (productDtoUpdate.ImageFile?.Length > 1 * 1024 * 1024)
+                 {
+                     return StatusCode(StatusCodes.Status400BadRequest, "File size should " +
+                         "not exceed 1 mb");
+
+                 }
+
+                 string[] allowedFileExtensions = { ".jpg", ".jpeg", ".png" };
+                 string createdImageName =await _fileService.SaveFileAsync(productDtoUpdate.ImageFile, allowedFileExtensions);
+                 productDtoUpdate.ProductImage = createdImageName;
+             }
+             await _manager.ProductService.UpdateOneProductAsync(id, productDtoUpdate, true);
+             if (productDtoUpdate != null) {
+
+                 _fileService.DeleteFileAsync(oldImage);
+             }
+
+
+             return NoContent();
+
+
+         }*/
+
         [ServiceFilter(typeof(ValidationFilterAttribute))]
-
-        [HttpPut("{id:int}")]
-
-        public async Task<IActionResult> UpdateOneProductAsync([FromRoute(Name="id")] int id, [FromBody] ProductDtoForUpdate productDto)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateOneProductAsync(int id, [FromForm] ProductDtoForUpdate productDtoUpdate)
         {
-            if(productDto is null)
+            try
             {
-                return BadRequest();
+                if (productDtoUpdate.ImageFile != null)
+                {
+                    if (productDtoUpdate.ImageFile.Length > 1 * 1024 * 1024)
+                    {
+                        return StatusCode(StatusCodes.Status400BadRequest, "File size should not exceed 1 mb");
+                    }
+
+                    string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
+                    string createdImageName = await _fileService.SaveFileAsync(productDtoUpdate.ImageFile, allowedExtensions);
+
+                    productDtoUpdate.ProductImage = createdImageName;
+                }
+
+                await _manager.ProductService.UpdateOneProductAsync(id, productDtoUpdate,true);
+                return StatusCode(200);
             }
-            await _manager.ProductService.UpdateOneProductAsync(id, productDto, true);
-            return NoContent();
-
-
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
+
+
+
+
+
         [HttpGet("{id:int}")]
 
-        public async Task<IActionResult> getOneProductAsync([FromRoute(Name="id)")] int id)
+        public async Task<IActionResult> GetOneProductAsync([FromRoute] int id)
         {
 
-            var oneProduct = _manager.ProductService.GetOneProductbyIdAsync(id, false);
+            var oneProduct =await  _manager.ProductService.GetOneProductbyIdAsync(id, false);
 
             if(oneProduct is null)
             {
@@ -85,11 +175,14 @@ namespace Presentation.Controller
             }
             return Ok(oneProduct);
         }
+
+
+
         [HttpDelete("{id:int}")]
 
-        public IActionResult DeleteOneProductAsync([FromRoute(Name="id")] int id)
+        public async Task<IActionResult> DeleteOneProductAsync([FromRoute(Name="id")] int id)
         {
-            _manager.ProductService.DeleteOneProductAsync(id, false);
+          await  _manager.ProductService.DeleteOneProductAsync(id, false);
             return NoContent();
         
         }
