@@ -52,7 +52,7 @@ namespace Presentation.Controller
         public async Task<IActionResult> GetAllOrder()
         {
 
-            var Order = _manager.OrderService.GetAllOrder(false);
+            var Order =  _manager.OrderService.GetAllOrder(false);
         
         return Ok(Order);
         }

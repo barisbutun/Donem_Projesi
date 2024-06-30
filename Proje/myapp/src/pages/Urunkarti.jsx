@@ -42,7 +42,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../UrunKarti.css';
+import '../css/UrunKarti.css';
 
 const Urunkartı = ({ urun }) => {
   if (!urun) {

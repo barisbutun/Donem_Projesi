@@ -10,7 +10,7 @@ namespace Entities.DataTransferObject
     public record ProductDtoForUpdate()
     {
       
-        public int BolgeID { get; set; }
+        public int? BolgeID { get; set; }
         public int Price { get; set; }
         public string Parca_Adi { get; set; }
         public string Marka_Adi { get; set; }

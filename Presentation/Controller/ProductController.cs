@@ -69,7 +69,7 @@ namespace Presentation.Controller
 
 
 
-           return Ok(Product);
+            return Ok(Product);
 
 
         }
@@ -81,54 +81,14 @@ namespace Presentation.Controller
 
             var PagedResult = await _manager.ProductService.GetAllProductAsync(productParameters, false);
 
-           // Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(PagedResult.metaData));
+            //Console.WriteLine(PagedResult);
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(PagedResult.metaData));
 
             return Ok(PagedResult.product);
         }
-
-
-        /* [HttpPut("{id:int}")]
-
-         public async Task<IActionResult> UpdateOneProductAsync([FromRoute(Name="id")] int id,
-             [FromForm] ProductDtoForUpdate productDtoUpdate)
-         {
-             if(productDtoUpdate is null)
-             {
-                 return BadRequest();
-             }
-             var existingProduct = await
-                 _manager.ProductService.GetOneProductbyIdAsync(id, true);
-             if (existingProduct is null)
-             {
-                 return StatusCode(StatusCodes.Status404NotFound,
-                     $"Product with id:{id} does not found");
-
-             }
-             string oldImage = existingProduct.ProductImage;
-             if(productDtoUpdate != null)
-             {
-                 if (productDtoUpdate.ImageFile?.Length > 1 * 1024 * 1024)
-                 {
-                     return StatusCode(StatusCodes.Status400BadRequest, "File size should " +
-                         "not exceed 1 mb");
-
-                 }
-
-                 string[] allowedFileExtensions = { ".jpg", ".jpeg", ".png" };
-                 string createdImageName =await _fileService.SaveFileAsync(productDtoUpdate.ImageFile, allowedFileExtensions);
-                 productDtoUpdate.ProductImage = createdImageName;
-             }
-             await _manager.ProductService.UpdateOneProductAsync(id, productDtoUpdate, true);
-             if (productDtoUpdate != null) {
-
-                 _fileService.DeleteFileAsync(oldImage);
-             }
-
-
-             return NoContent();
-
-
-         }*/
+        
+        
+      
 
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPut("{id}")]
@@ -216,6 +176,48 @@ namespace Presentation.Controller
 
 
         }
+        /* [HttpPut("{id:int}")]
+
+       public async Task<IActionResult> UpdateOneProductAsync([FromRoute(Name="id")] int id,
+           [FromForm] ProductDtoForUpdate productDtoUpdate)
+       {
+           if(productDtoUpdate is null)
+           {
+               return BadRequest();
+           }
+           var existingProduct = await
+               _manager.ProductService.GetOneProductbyIdAsync(id, true);
+           if (existingProduct is null)
+           {
+               return StatusCode(StatusCodes.Status404NotFound,
+                   $"Product with id:{id} does not found");
+
+           }
+           string oldImage = existingProduct.ProductImage;
+           if(productDtoUpdate != null)
+           {
+               if (productDtoUpdate.ImageFile?.Length > 1 * 1024 * 1024)
+               {
+                   return StatusCode(StatusCodes.Status400BadRequest, "File size should " +
+                       "not exceed 1 mb");
+
+               }
+
+               string[] allowedFileExtensions = { ".jpg", ".jpeg", ".png" };
+               string createdImageName =await _fileService.SaveFileAsync(productDtoUpdate.ImageFile, allowedFileExtensions);
+               productDtoUpdate.ProductImage = createdImageName;
+           }
+           await _manager.ProductService.UpdateOneProductAsync(id, productDtoUpdate, true);
+           if (productDtoUpdate != null) {
+
+               _fileService.DeleteFileAsync(oldImage);
+           }
+
+
+           return NoContent();
+
+
+       }*/
 
 
 

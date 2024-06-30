@@ -29,10 +29,13 @@ namespace Services
 
         public async Task<string> SaveFileAsync(IFormFile imageFile, string[] allowedFileExtensions)
         {
+            
             if(imageFile == null)
             {
                 throw new ArgumentNullException(nameof(imageFile)); 
             }
+            var imageDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+
             var contentPath= environment.ContentRootPath;
             var path = Path.Combine(contentPath,"Proje/myapp/src/Urunler");
 
@@ -48,9 +51,11 @@ namespace Services
                     allowedFileExtensions)} are allowed");
 
             }
-            var fileName = $"{Guid.NewGuid().ToString()} {ext}";
-            var fileNameWithPath = Path.Combine(path, fileName);
-            using var stream = new FileStream(fileNameWithPath,
+            var fileName = $"{Guid.NewGuid().ToString()}{ext}";
+            var filePath=Path.Combine(imageDirectory, fileName);
+
+            
+            using var stream = new FileStream(filePath,
                 FileMode.Create);
             await imageFile.CopyToAsync(stream);
             return fileName;

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../logolar/homelogo.png';
-import '../Anasayfa.css';
-import Arka_Kapı_Gergisi from '../Urunler/27.png';
-import On_Panel from '../Urunler/26.png';
-import Yag_Filtresi from '../Urunler/28.png';
-import Sis_Farı_Lambası from '../Urunler/37.png';
+import '../css/Anasayfa.css';
+import Arka_Kapı_Gergisi from '../Urunler/29.png';
+import On_Panel from '../Urunler/23.png';
+import Yag_Filtresi from '../Urunler/26.png';
+import Sis_Farı_Lambası from '../Urunler/28.png';
+import axios from 'axios';
 
 const categories = [
   { bolgeId: 1, name: 'Motor' },
@@ -29,28 +30,28 @@ const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [data, setData] = useState([]);
 
   const toggleCategories = () => {
     setShowCategories(!showCategories);
   };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch('/api/urunler'); // API URL'sini uygun şekilde güncelleyin
-        if (!response.ok) {
-          throw new Error('Ürünler alınamadı.');
-        }
-        const data = await response.json();
-        setProducts(data);
-        setFilteredProducts(data); // Başlangıçta tüm ürünleri göster
-      } catch (error) {
-        console.error('Hata:', error.message);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+    if (searchTerm) {
+      // burada apinin urlsini girilecek
+      axios.get('https://api/Product/search?query=${searchTerm}`')
+        .then(response => {
+          setData(response.data);
+        })
+        .catch(error => {
+          console.error("Veriler getirilirken bir hata oluştu.", error)
+        });
+    }
+    else {
+      setData([]);
+    }
+  }, [searchTerm]);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -60,10 +61,7 @@ const HomePage = () => {
 
   const handleSearch = async (event) => {
     event.preventDefault();
-    const filtered = products.filter((product) =>
-      product.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredProducts(filtered);
+    setSelectedCategory(searchQuery);
   };
 
   return (
@@ -99,6 +97,15 @@ const HomePage = () => {
           <img className="header-logo" src={logo} alt="logo" />
         </div>
       </header>
+      <div className='data-container'>
+        {
+          data.map((val) => (
+            <div className='data' key={val.id}>
+              <p>{val.name}</p>
+            </div>
+          ))
+        }
+      </div>
       <main className="App-main">
         <section className="hero">
           <div className="hero-text">

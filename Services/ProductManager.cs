@@ -19,7 +19,7 @@ namespace Services
         private readonly IRepositoryManager _manager;
         private readonly ILoggerService _logger;
         private readonly IMapper _mapper;
-
+        
         public ProductManager(IRepositoryManager manager, ILoggerService logger, IMapper mapper)
         {
             _manager = manager;
@@ -33,6 +33,7 @@ namespace Services
 
             _manager.Urunler.CreateOneProduct(urunler);
             await _manager.SaveAsync();
+            
             return _mapper.Map<ProductDto>(urunler);
           
         }

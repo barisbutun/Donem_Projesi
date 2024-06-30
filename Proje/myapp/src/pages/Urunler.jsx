@@ -1,70 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import Urunkartı from './Urunkartı';
-import '../Urunler.css';
-import images from '../utils/images'; // Resimleri içe aktarın
+import Urunkartı from './Urunkarti';
+import axios from 'axios';
+import '../css/Urunler.css';
 
 const Urunler = () => {
   const [urunlerDizisi, setUrunlerDizisi] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [sayfa, setSayfa] = useState(1);
   const [resimSayisi, setResimSayisi] = useState(10);
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [showFilter, setShowFilter] = useState(false); // Filtreleme alanının görünürlüğünü saklamak için
 
   useEffect(() => {
     const fetchUrunler = async () => {
       try {
-        const response = await fetch('https://localhost:7242/api/product/All_Prodcut'); // API URL'sini doğru şekilde güncelleyin
-        if (!response.ok) {
-          throw new Error('Veriler alınamadı');
-        }
-        const data = await response.json();
-
-        // Resimleri ekleyin
-        const urunlerWithImages = data.map((urun) => ({
-          ...urun,
-          resim: images[urun.ProductImage], // UrunId kullanarak resim yolu ekleyin
-        }));
-
-        setUrunlerDizisi(urunlerWithImages);
-        setFilteredProducts(urunlerWithImages); // Başlangıçta tüm ürünleri göster
-      } catch (error) {
-        console.error('Veriler alınamadı:', error.message);
+        const response = await axios.get('https://localhost:7242/api/product/All_Prodcut');
+        setUrunlerDizisi(response.data);
+        setLoading(false);
+      }
+      catch (err) {
+        setError(err);
+        setLoading(false);
       }
     };
-
     fetchUrunler();
   }, []);
 
   const handleSayfaDegistir = (yeniSayfa) => {
-    if (yeniSayfa > 0 && yeniSayfa <= Math.ceil(filteredProducts.length / resimSayisi)) {
+    if (yeniSayfa > 0 && yeniSayfa <= Math.ceil(urunlerDizisi.length / resimSayisi)) {
       setSayfa(yeniSayfa);
     }
   };
 
   const handleResimSayisiDegistir = (yeniResimSayisi) => {
-    const maxSayfaSayisi = Math.ceil(filteredProducts.length / yeniResimSayisi);
+    const maxSayfaSayisi = Math.ceil(urunlerDizisi.length / yeniResimSayisi);
     if (sayfa > maxSayfaSayisi) {
       setSayfa(maxSayfaSayisi);
     }
     setResimSayisi(yeniResimSayisi);
   };
 
-  const handleFilter = () => {
-    const filtered = urunlerDizisi.filter((urun) => {
-      const price = parseFloat(urun.price);
-      const min = parseFloat(minPrice) || 0;
-      const max = parseFloat(maxPrice) || Infinity;
-      return price >= min && price <= max;
-    });
-    setFilteredProducts(filtered);
-    setSayfa(1); // Filtreleme sonrası sayfayı başa al
-  };
-
   const baslangicIndeks = (sayfa - 1) * resimSayisi;
   const bitisIndeks = baslangicIndeks + resimSayisi;
-  const gorunenUrunler = filteredProducts.slice(baslangicIndeks, bitisIndeks);
+  const gorunenUrunler = urunlerDizisi.slice(baslangicIndeks, bitisIndeks);
+  if (loading) return <p>Yükleniyor</p>;
+  if (error) return <p>Hata:{error.message}</p>;
 
   return (
     <section className="urunSayfasi">
@@ -72,8 +51,8 @@ const Urunler = () => {
         {gorunenUrunler.length === 0 ? (
           <p>Yükleniyor...</p>
         ) : (
-          gorunenUrunler.map((urun) => (
-            <Urunkartı key={urun.urunID} urun={urun} />
+          urunlerDizisi && urunlerDizisi.map((urun) => (
+            <Urunkartı key={urun.id} urun={urun} />
           ))
         )}
       </div>
@@ -81,18 +60,21 @@ const Urunler = () => {
       <footer>
         <div className="sayfalama">
           <button onClick={() => handleSayfaDegistir(sayfa - 1)} disabled={sayfa === 1}>Önceki</button>
-          <span>{sayfa} / {Math.ceil(filteredProducts.length / resimSayisi)}</span>
-          <button onClick={() => handleSayfaDegistir(sayfa + 1)} disabled={sayfa === Math.ceil(filteredProducts.length / resimSayisi)}>Sonraki</button>
+          <span>{sayfa} / {Math.ceil(urunlerDizisi.length / resimSayisi)}</span>
+          <button onClick={() => handleSayfaDegistir(sayfa + 1)} disabled={sayfa === Math.ceil(urunlerDizisi.length / resimSayisi)}>Sonraki</button>
         </div>
 
         <div className="resimSayisiKontrol">
           <select value={resimSayisi} onChange={(e) => handleResimSayisiDegistir(parseInt(e.target.value))}>
-            <option value={5}>5</option>
             <option value={10}>10</option>
             <option value={20}>20</option>
+            <option value={30}>30</option>
+            <option value={40}>40</option>
+            <option value={50}>50</option>
           </select>
         </div>
       </footer>
+
     </section>
   );
 };

@@ -6,15 +6,20 @@ using System.Threading.Tasks;
 
 namespace Entities.RequestFeatures
 {
-    public class RequestParameters
+    public abstract class RequestParameters
     {
         const int maxPageSize = 50;
         public int PageNumber { get; set; }
-        private int _pageSize;
+        public int _pageSize;
 
         public int PageSize
         {
-            get { return _pageSize; }
+            get { 
+                if(_pageSize == null) {
+                    
+
+                }
+                return _pageSize; }
             set { _pageSize = value > maxPageSize ? maxPageSize : value; }
         }
         public String? OrderBy { get; set; }

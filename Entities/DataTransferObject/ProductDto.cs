@@ -15,7 +15,7 @@ namespace Entities.DataTransferObject
      
       
      
-        public int BolgeID { get; set; }
+        public int? BolgeID { get; set; }
      
 
         public int Price { get; set; }

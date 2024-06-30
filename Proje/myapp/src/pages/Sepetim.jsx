@@ -1,40 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../Sepetim.css';
+import PropTypes from 'prop-types';
+import '../css/Sepetim.css';
 
 function Sepetim() {
   const [urunState, setUrunState] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
 
+
   useEffect(() => {
-    // Sepet verilerini backend'den çek
-    fetch('/api/sepetim')
-      .then(response => response.json())
-      .then(data => setUrunState(data))
-      .catch(error => console.error('Error fetching cart data:', error));
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(''); // API URl sini yazacaksın ürünleri çekmek için
+        setUrunState(response.data);
+      } catch (error) {
+        console.error('Ürünler çekilirken hata oluştu:', error);
+      }
+    };
+    fetchProducts();
   }, []);
 
   const handleAddToCart = (urun) => {
-    const existingProductIndex = urunState.findIndex((item) => item.urunler.urunId === urun.urunler.urunId);
+    const existingProductIndex = cartItems.findIndex((item) => item.urunler.urunId === urun.urunId);
 
     if (existingProductIndex !== -1) {
-      const updatedCartItems = [...urunState];
+      const updatedCartItems = [...cartItems];
       updatedCartItems[existingProductIndex].quantity++;
-      setUrunState(updatedCartItems);
+      setCartItems(updatedCartItems);
     } else {
-      setUrunState([...urunState, { ...urun, quantity: 1 }]);
+      setCartItems([...cartItems, { urunler: urun, quantity: 1 }]);
     }
   };
 
   const handleRemoveFromCart = (urun) => {
-    setUrunState(urunState.filter((item) => item.urunler.urunId !== urun.urunler.urunId));
+    setCartItems(cartItems.filter((item) => item.urunler.urunId !== urun.urunId));
   };
 
   const handleUpdateCartQuantity = (urun, quantity) => {
-    setUrunState(
-      urunState.map((item) => {
-        if (item.urunler.urunId === urun.urunler.urunId) {
+    setCartItems(
+      cartItems.map((item) => {
+        if (item.urunler.urunId === urun.urunId) {
           return { ...item, quantity };
         }
         return item;
@@ -43,7 +50,7 @@ function Sepetim() {
   };
 
   const getSubtotal = () => {
-    return urunState.reduce((total, item) => total + item.urunler.price * item.quantity, 0);
+    return cartItems.reduce((total, item) => total + item.urunler.price * item.quantity, 0);
   };
 
   const getShippingCost = () => {
@@ -60,31 +67,18 @@ function Sepetim() {
 
   const handleCheckout = () => {
     const newOrder = {
-      SiparisId: new Date().getTime(), // Siparişe benzersiz bir ID atayın
-      BolgeId: 1, // Örnek bir Bölge ID'si
-      items: urunState,
+      id: new Date().getTime(), // Siparişe benzersiz bir ID atama
+      items: cartItems,
       total: getTotal()
     };
-
-    fetch('/api/siparis', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newOrder)
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Sipariş gönderildi:', data);
-        navigate('/Siparis', { state: { order: data } });
-      })
-      .catch(error => console.error('Error submitting order:', error));
+    alert('Ödemeniz başarılı bir şekilde gerçekleşti.')
+    navigate('/Siparis', { state: { order: newOrder } });
   };
 
   return (
     <div className='SepetContainer'>
       <h1>Sepetiniz</h1>
-      {urunState.length === 0 ? (
+      {cartItems.length === 0 ? (
         <div>Sepetinizde ürün bulunmamaktadır.</div>
       ) : (
         <div>
@@ -99,7 +93,7 @@ function Sepetim() {
               </tr>
             </thead>
             <tbody>
-              {urunState.map((urun) => (
+              {cartItems.map((urun) => (
                 <tr key={urun.urunler.urunId}>
                   <td>{urun.urunler.name}</td>
                   <td>{urun.urunler.price.toFixed(2)} TL</td>
@@ -109,13 +103,13 @@ function Sepetim() {
                       min="1"
                       value={urun.quantity}
                       onChange={(event) =>
-                        handleUpdateCartQuantity(urun, parseInt(event.target.value))
+                        handleUpdateCartQuantity(urun.urunler, parseInt(event.target.value))
                       }
                     />
                   </td>
                   <td>{(urun.urunler.price * urun.quantity).toFixed(2)} TL</td>
                   <td>
-                    <button onClick={() => handleRemoveFromCart(urun)}>Sil</button>
+                    <button onClick={() => handleRemoveFromCart(urun.urunler)}>Sil</button>
                   </td>
                 </tr>
               ))}
@@ -271,3 +265,4 @@ export default Sepetim;
 // };
 
 // export default Sepetim;
+

@@ -12,7 +12,7 @@ using Repositories.EFCore.Extensions;
 
 namespace Repositories.EFCore
 {
-    public class ProductRepository : RepositoryBase<Urunler>, IProductRepository
+    public sealed class ProductRepository : RepositoryBase<Urunler>, IProductRepository
     {
         public ProductRepository(RepositoryContext context) : base(context)
         {
@@ -25,20 +25,20 @@ namespace Repositories.EFCore
 
         public async Task<PagedList<Urunler>> GetAllProductAsync(ProductParameters productParameters, bool trackChanges)
         {
-            var query = FindAll(trackChanges).FilterProducts(productParameters.MinPrice, productParameters.MaxPrice)
-          .Search(productParameters.SearchTerm)
-          .OrderBy(b => b.UrunID)
-          .Sort(productParameters.OrderBy)
-          .AsQueryable();
+           
+            var query=await FindAll(trackChanges).
+            FilterProducts(productParameters.MinPrice, productParameters.MaxPrice)
+            .BolgeID(productParameters.BolgeID)
+            .Sort(productParameters.OrderBy)
+            .Search(productParameters.SearchTerm)    
+            .OrderBy(b=>b.UrunID).
 
-            var count = await query.CountAsync();
+            ToListAsync();  
 
-            var products = await query
-          .ApplyPagination(productParameters.PageNumber, productParameters.PageSize)
-                .ToListAsync();
 
-            return new PagedList<Urunler>(products,count, productParameters.PageNumber, productParameters.PageSize);
-        }
+            return PagedList<Urunler>.ToPagedList(query,productParameters.PageNumber,productParameters.PageSize);
+
+            }
 
 
 
