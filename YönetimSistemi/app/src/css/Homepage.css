@@ -1,0 +1,105 @@
+.home{
+display: grid; /* Grid düzenini kullanın */
+ gap: 10px; 
+ width: 100%;
+
+}
+.homeLogo{
+   width: 15%;
+   margin-left: 80%;
+}
+.homeHeader{
+    background-color: rgb(206, 235, 221);
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0px;
+}
+
+.homeMenu{
+    font-size:170%;
+    cursor: 'pointer';
+    margin-left: 1%;
+}
+.menu{
+    margin-top: -2px;
+    position:absolute; 
+    top: 6%;     
+    left: 0;
+    background-color:  rgb(206, 235, 221);
+    padding: 10px 20px;
+    border-radius: 5px;
+    height: 91%;
+  }
+  
+  .menu ul {
+    list-style-type:none;
+    margin: 0;
+    padding: 10px;
+   
+  }
+
+ .menu ul li{
+  list-style-type: none;
+    margin: 10px 0;
+    background-color: transparent;
+    text-decoration: none;
+    width:100px ;
+   
+  }
+  .menu  li:hover{
+    background-color:  rgb(53, 234, 153);
+  }
+ 
+.menu a{
+  color: rgb(49, 46, 46); /* Yazı rengi */
+  text-decoration: none; /* Altı çizili olmasın */
+  display: block;
+  font-size: 16px; /* Yazı boyutu */
+}
+ 
+  .homeBody{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  } 
+
+  .pagination {
+    position: fixed; /* Sayfalama çubuğunu sabitler */
+    bottom: 0; 
+    left: 0;
+    width: 100%; 
+    display: flex;
+    justify-content: center; 
+    background-color: rgb(206, 235, 221); 
+    padding: 10px 0; 
+    z-index: 1000; /* Diğer içeriklerin üzerinde görünmesini sağlar */
+  }
+  
+  .pagination button {
+    background-color:white;
+    color: #000000; 
+    border: none; 
+    padding: 10px 20px; 
+    margin: 0 5px; 
+    cursor: pointer;  
+    border-radius: 5px; 
+    transition: background-color 0.3s ease; /* Butonların arka plan rengini geçişli hale getirir */
+  }
+  
+  .pagination button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .pagination button:disabled {
+    background-color: #cccccc; /* Devre dışı bırakılan butonların arka plan rengini gri yapar */
+    cursor: not-allowed; /* Devre dışı butonlarda fare imlecini değiştirmez */
+  }
+
+  .page-number {
+    margin: 0 15px;
+    color: #565454; /* Sayfa numarasının rengini beyaz yapar */
+    font-weight: bold;
+  }

@@ -1,0 +1,39 @@
+[
+    {
+        
+        "isim":"OYET",
+        "resim":"./images/orman.png",
+        "aktifkullanici":10,
+        "kullanilancihaz":20,
+        "url":"https://www.ogm.gov.tr/tr"
+
+    },
+    {
+     
+        "isim":"Digithaous",
+        "resim":"./images/tren.png",
+        "aktifkullanici":20,
+        "kullanilancihaz":50,
+        "url":"https://www.tcdd.gov.tr"
+
+        
+    },
+    {
+        
+        "isim":"Sirket Yönetimi",
+        "resim":"./images/sirket.png",
+        "aktifkullanici":3,
+        "kullanilancihaz":30,
+        "url":"https://www.eltagron.com.tr"
+        
+    },
+    {
+      
+        "isim":"Others",
+        "resim": "./logo192.png",
+        "aktifkullanici":30,
+        "kullanilancihaz":50,
+        "url":""
+        
+    }
+]

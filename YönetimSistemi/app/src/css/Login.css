@@ -1,0 +1,44 @@
+.login{
+    width: 30%;
+    height: 50%;
+    /* background-image: url('../logolar/eltagron.png'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    left: 35%;
+    top: 20%;
+    border: 5px solid rgba(28, 160, 50, 0.896);
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    gap: 10px;
+    padding: 0px;
+
+}
+.login img{
+    height:30%;
+    width: 80%;
+}
+.login input,
+.login input {
+    width: 70%;
+    height: 30px;
+    border-radius: 10px;
+    height: 40px;
+    border:1px solid green;
+}
+
+.login button {
+    background-color: rgba(28, 160, 50, 0.896);
+    border-radius: 5px;
+    width: 100px;
+    border: none;
+    height: 30px;
+}
+
+.login h1{
+ margin-bottom:20px;
+ font-family:sans-serif;
+}

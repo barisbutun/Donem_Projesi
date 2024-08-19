@@ -1,0 +1,22 @@
+.devicedefinition{
+    display: grid; /* Grid düzenini kullanın */
+    gap: 10px; 
+    width: 100%;
+}
+
+.deviceBody{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 80%;
+gap: 20px;
+}
+
+
+.title{
+    margin: 0;
+    font-size: 2.0rem; /* Başlık boyutu */
+    font-weight: bold; /* Kalın yazı tipi */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.993);
+}
